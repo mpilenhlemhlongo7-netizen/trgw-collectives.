@@ -1,0 +1,8 @@
+{
+  "env": {
+    "MAGIC_API_KEY": ""
+  },
+  "permissions": {
+    "defaultMode": "default"
+  }
+}
