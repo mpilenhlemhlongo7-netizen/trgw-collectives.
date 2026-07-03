@@ -1,0 +1,48 @@
+{
+  "provider": "auto",
+  "speed": 1,
+  "lines": [
+    {
+      "id": "01",
+      "text": "What if the real barrier to success isn't money? But the mindset you've inherited?"
+    },
+    {
+      "id": "02",
+      "text": "Meet the Five Pocket Wealth System, from Think Rich, Grow Wise."
+    },
+    {
+      "id": "03",
+      "text": "First, Owner's Equity. Fifteen percent pays you, for being the owner."
+    },
+    {
+      "id": "04",
+      "text": "Learn and Grow, twenty percent, buys you knowledge before it buys you things."
+    },
+    {
+      "id": "05",
+      "text": "Petty Cash, fifteen percent, for the small stuff. Guilt-free."
+    },
+    {
+      "id": "06",
+      "text": "Reinvestment, twenty-five percent, goes back into what's already working."
+    },
+    {
+      "id": "07",
+      "text": "And Emergency Fund, twenty-five percent, so a bad month never breaks you."
+    },
+    {
+      "id": "08",
+      "text": "Five pockets. One system. Every rand already has a job."
+    },
+    {
+      "id": "09",
+      "text": "Follow at trgw collectives, and get Think Rich, Grow Wise, by Melokuhle Nsizwa Mhlongo."
+    }
+  ],
+  "bgm": {
+    "mode": "retrieve",
+    "query": "Every rand you earn has five jobs — the Five Pocket Wealth System splits it with intention.",
+    "blob": "Every rand you earn has five jobs — the Five Pocket Wealth System splits it with intention.",
+    "arc": "listicle"
+  }
+}
