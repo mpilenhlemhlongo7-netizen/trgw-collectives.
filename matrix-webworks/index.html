@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrix WebWorks | Websites and Digital Systems, Built to Commercial Standard</title>
+<meta name="description" content="Matrix WebWorks designs premium websites, brand kits and digital systems for businesses that want to look established. Get an instant project value estimate.">
+<style>
+  :root{
+    --navy-deep:#070d1a;
+    --navy:#0b1526;
+    --navy-card:#101d33;
+    --line:rgba(148,184,255,.14);
+    --cyan:#38d6f5;
+    --cyan-soft:rgba(56,214,245,.12);
+    --text:#e8eefb;
+    --muted:#93a3bf;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Ubuntu,sans-serif;
+    background:var(--navy-deep);color:var(--text);line-height:1.6;
+  }
+  img{max-width:100%}
+  a{color:var(--cyan);text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  section{padding:88px 0}
+  h1,h2,h3{line-height:1.15;font-weight:700}
+  h2{font-size:clamp(1.7rem,3.5vw,2.4rem);margin-bottom:14px}
+  .kicker{
+    display:inline-block;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--cyan);font-weight:600;margin-bottom:14px;
+  }
+  .sub{color:var(--muted);max-width:640px;font-size:1.05rem}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(7,13,26,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-weight:800;font-size:1.12rem;color:var(--text);letter-spacing:.02em}
+  .logo span{color:var(--cyan)}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:var(--muted);font-size:.92rem;font-weight:500}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-block;padding:12px 24px;border-radius:10px;font-weight:600;font-size:.95rem;
+    transition:transform .15s ease,box-shadow .15s ease;cursor:pointer;border:none;
+  }
+  .btn-primary{background:var(--cyan);color:#05202b}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(56,214,245,.35)}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);background:transparent}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .nav-links .btn{padding:9px 18px}
+  .nav-links a.btn-primary{color:#05202b}
+
+  /* HERO */
+  .hero{
+    padding:110px 0 90px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(900px 420px at 80% -10%,rgba(56,214,245,.13),transparent 60%),
+      radial-gradient(700px 380px at 10% 110%,rgba(56,120,245,.10),transparent 60%),
+      var(--navy-deep);
+  }
+  .hero h1{font-size:clamp(2.2rem,5.4vw,3.6rem);max-width:720px;margin-bottom:20px}
+  .hero h1 em{font-style:normal;color:var(--cyan)}
+  .hero p{max-width:560px;color:var(--muted);font-size:1.12rem;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .trust{
+    margin-top:56px;padding-top:28px;border-top:1px solid var(--line);
+    display:flex;gap:40px;flex-wrap:wrap;
+  }
+  .trust div strong{display:block;font-size:1.25rem}
+  .trust div span{color:var(--muted);font-size:.86rem}
+
+  /* GRID CARDS */
+  .grid{display:grid;gap:18px}
+  .grid-3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .card{
+    background:var(--navy-card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px;transition:border-color .2s ease,transform .2s ease;
+  }
+  .card:hover{border-color:rgba(56,214,245,.45);transform:translateY(-3px)}
+  .card h3{font-size:1.12rem;margin:14px 0 8px}
+  .card p{color:var(--muted);font-size:.95rem}
+  .icon{
+    width:44px;height:44px;border-radius:10px;background:var(--cyan-soft);
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+  }
+
+  /* PACKAGES */
+  .tier{position:relative;display:flex;flex-direction:column}
+  .tier .price{font-size:1.9rem;font-weight:800;margin:6px 0 2px}
+  .tier .price small{font-size:.85rem;color:var(--muted);font-weight:500}
+  .tier ul{list-style:none;margin:18px 0 26px;flex:1}
+  .tier li{padding:7px 0;color:var(--muted);font-size:.93rem;border-bottom:1px dashed var(--line)}
+  .tier li::before{content:"✓";color:var(--cyan);font-weight:700;margin-right:10px}
+  .tier .btn{text-align:center}
+  .badge{
+    position:absolute;top:-12px;right:20px;background:var(--cyan);color:#05202b;
+    font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:4px 12px;border-radius:99px;
+  }
+  .tier.featured{border-color:rgba(56,214,245,.55)}
+
+  /* ESTIMATOR */
+  .estimator{
+    background:var(--navy);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .est-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;margin-top:38px}
+  @media(max-width:860px){.est-layout{grid-template-columns:1fr}}
+  fieldset{border:none;margin-bottom:28px}
+  legend{font-weight:700;font-size:1rem;margin-bottom:14px;color:var(--text)}
+  .choice-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+  .choice{
+    border:1px solid var(--line);border-radius:10px;padding:14px;cursor:pointer;
+    background:var(--navy-card);transition:border-color .15s ease;
+  }
+  .choice:hover{border-color:rgba(56,214,245,.4)}
+  .choice input{display:none}
+  .choice strong{display:block;font-size:.95rem;margin-bottom:3px}
+  .choice span{color:var(--muted);font-size:.8rem}
+  .choice.active{border-color:var(--cyan);background:var(--cyan-soft)}
+  .addon{
+    display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--line);
+    border-radius:10px;margin-bottom:8px;cursor:pointer;background:var(--navy-card);
+    transition:border-color .15s ease;font-size:.93rem;
+  }
+  .addon:hover{border-color:rgba(56,214,245,.4)}
+  .addon input{accent-color:var(--cyan);width:17px;height:17px;cursor:pointer}
+  .addon .a-name{flex:1}
+  .addon .a-val{color:var(--muted);font-size:.82rem}
+  .est-result{
+    background:var(--navy-card);border:1px solid rgba(56,214,245,.4);border-radius:var(--radius);
+    padding:30px;position:sticky;top:92px;height:fit-content;
+  }
+  .est-result h3{font-size:1.05rem;margin-bottom:22px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .res-line{margin-bottom:22px}
+  .res-line .lbl{font-size:.82rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .res-line .val{font-size:2rem;font-weight:800}
+  .res-line .val.market{color:var(--cyan)}
+  .res-line .note{font-size:.8rem;color:var(--muted)}
+  .savings{
+    background:var(--cyan-soft);border-radius:10px;padding:14px;text-align:center;
+    font-weight:600;font-size:.95rem;margin-bottom:22px;
+  }
+  .disclaimer{font-size:.76rem;color:var(--muted);margin-top:16px}
+
+  /* PROOF */
+  .proof-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:36px}
+
+  /* PROCESS */
+  .steps{counter-reset:step;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:36px}
+  .step{border-left:2px solid var(--cyan);padding:4px 0 4px 18px}
+  .step::before{
+    counter-increment:step;content:"0" counter(step);
+    display:block;font-size:.8rem;color:var(--cyan);font-weight:700;letter-spacing:.1em;margin-bottom:6px;
+  }
+  .step h3{font-size:1.02rem;margin-bottom:6px}
+  .step p{color:var(--muted);font-size:.9rem}
+
+  /* CTA + FOOTER */
+  .cta-band{
+    text-align:center;background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
+    border-top:1px solid var(--line);
+  }
+  .cta-band .btn{margin-top:26px}
+  footer{border-top:1px solid var(--line);padding:36px 0;color:var(--muted);font-size:.85rem}
+  .foot-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+  @media(max-width:640px){
+    .nav-links a:not(.btn){display:none}
+    section{padding:64px 0}
+    .hero{padding:80px 0 64px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo">Matrix<span>WebWorks</span></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#packages">Packages</a>
+      <a href="#estimator">Value Estimator</a>
+      <a href="#process">Process</a>
+      <a href="#contact" class="btn btn-primary">Start a Project</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Web Design &amp; Digital Services</span>
+    <h1>Websites and digital systems, built to <em>commercial standard</em>.</h1>
+    <p>Matrix WebWorks designs premium websites, brand kits and content systems for businesses that want to look established from day one; delivered lean, priced honestly.</p>
+    <div class="hero-cta">
+      <a href="#estimator" class="btn btn-primary">Estimate Your Project Value</a>
+      <a href="#packages" class="btn btn-ghost">View Packages</a>
+    </div>
+    <div class="trust">
+      <div><strong>3 ventures</strong><span>powered inside our own ecosystem</span></div>
+      <div><strong>$30,000</strong><span>agency-grade value, delivered lean</span></div>
+      <div><strong>7 days</strong><span>fastest launch turnaround</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <span class="kicker">What We Build</span>
+    <h2>Productised services, not billable hours</h2>
+    <p class="sub">Every service is a defined package with a defined outcome. You know what you get, what it costs and when it lands.</p>
+    <div class="grid grid-3" style="margin-top:36px">
+      <div class="card">
+        <div class="icon">🖥️</div>
+        <h3>Website Design &amp; Build</h3>
+        <p>Fast, mobile-first websites that present your business at corporate quality; from one-page launches to full platforms.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛒</div>
+        <h3>E-commerce Setup</h3>
+        <p>Product catalogues, secure checkout and order flow so you can sell online without a developer on retainer.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Brand Identity Kits</h3>
+        <p>Logo, palette, typography and usage rules in one coherent kit, so every touchpoint looks like the same company.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📣</div>
+        <h3>Social Media Launch Kits</h3>
+        <p>Profile setup, cover art, post templates and a 30-day content plan across TikTok, YouTube, X and Pinterest.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📄</div>
+        <h3>Business Document Design</h3>
+        <p>Proposals, company profiles and pitch documents designed to stand next to any established firm's paperwork.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <h3>Care Plans</h3>
+        <p>Monthly updates, backups and content changes so your site stays fast, secure and current after launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="packages" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker">Launch Pricing</span>
+    <h2>Three packages, clear outcomes</h2>
+    <p class="sub">Launch pricing for our founding client base. Every package includes mobile-first design, basic SEO hygiene and a handover walkthrough.</p>
+    <div class="grid grid-3" style="margin-top:40px">
+      <div class="card tier">
+        <h3>Starter Presence</h3>
+        <div class="price">R3,500 <small>once-off</small></div>
+        <p style="color:var(--muted);font-size:.88rem">For a business that needs to exist online this week.</p>
+        <ul>
+          <li>One-page professional website</li>
+          <li>Mobile-first, fast loading</li>
+          <li>WhatsApp and contact integration</li>
+          <li>Google Business profile setup</li>
+          <li>Launch in 7 days</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Choose Starter</a>
+      </div>
+      <div class="card tier featured">
+        <span class="badge">Most Popular</span>
+        <h3>Business Growth</h3>
+        <div class="price">R8,500 <small>once-off</small></div>
+        <p style="color:var(--muted);font-size:.88rem">For a business ready to win customers online.</p>
+        <ul>
+          <li>Up to 6 custom pages</li>
+          <li>Lead capture and booking forms</li>
+          <li>SEO foundations and analytics</li>
+          <li>Brand style refresh</li>
+          <li>2 revision rounds</li>
+          <li>Launch in 14 days</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Choose Growth</a>
+      </div>
+      <div class="card tier">
+        <h3>Flagship Platform</h3>
+        <div class="price">R18,000 <small>once-off</small></div>
+        <p style="color:var(--muted);font-size:.88rem">For a business building a serious digital asset.</p>
+        <ul>
+          <li>E-commerce or membership platform</li>
+          <li>Full brand identity kit</li>
+          <li>Content hub and blog system</li>
+          <li>Analytics dashboard</li>
+          <li>3 months of care plan included</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Choose Flagship</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="estimator" class="estimator">
+  <div class="wrap">
+    <span class="kicker">Instant Estimate</span>
+    <h2>What is your website actually worth?</h2>
+    <p class="sub">Select what your project needs. We show you the comparable agency market value, then what the same build costs with Matrix WebWorks.</p>
+
+    <div class="est-layout">
+      <div>
+        <fieldset>
+          <legend>1. Choose your project type</legend>
+          <div class="choice-row" id="typeRow">
+            <label class="choice active" data-mww="3500" data-mkt="2500">
+              <input type="radio" name="ptype" value="starter" checked>
+              <strong>Starter Site</strong><span>One-page launch presence</span>
+            </label>
+            <label class="choice" data-mww="8500" data-mkt="8000">
+              <input type="radio" name="ptype" value="business">
+              <strong>Business Site</strong><span>Multi-page, lead-focused</span>
+            </label>
+            <label class="choice" data-mww="18000" data-mkt="15000">
+              <input type="radio" name="ptype" value="flagship">
+              <strong>Flagship Platform</strong><span>E-commerce or membership</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. Add what you need</legend>
+          <label class="addon"><input type="checkbox" data-mww="1200" data-mkt="1500"><span class="a-name">Extra pages pack (up to 4 additional pages)</span><span class="a-val">+R1,200</span></label>
+          <label class="addon"><input type="checkbox" data-mww="1500" data-mkt="2000"><span class="a-name">Professional copywriting</span><span class="a-val">+R1,500</span></label>
+          <label class="addon"><input type="checkbox" data-mww="2500" data-mkt="3500"><span class="a-name">Brand identity kit (logo, palette, typography)</span><span class="a-val">+R2,500</span></label>
+          <label class="addon"><input type="checkbox" data-mww="1800" data-mkt="2500"><span class="a-name">Booking and appointment system</span><span class="a-val">+R1,800</span></label>
+          <label class="addon"><input type="checkbox" data-mww="1500" data-mkt="2000"><span class="a-name">Blog and content hub</span><span class="a-val">+R1,500</span></label>
+          <label class="addon"><input type="checkbox" data-mww="1200" data-mkt="2500"><span class="a-name">SEO setup and search registration</span><span class="a-val">+R1,200</span></label>
+          <label class="addon"><input type="checkbox" data-mww="2000" data-mkt="2500"><span class="a-name">Social media launch kit</span><span class="a-val">+R2,000</span></label>
+          <label class="addon"><input type="checkbox" data-mww="1350" data-mkt="1500"><span class="a-name">Care plan, first 3 months</span><span class="a-val">+R1,350</span></label>
+        </fieldset>
+      </div>
+
+      <div class="est-result">
+        <h3>Your Estimate</h3>
+        <div class="res-line">
+          <div class="lbl">Comparable agency market value</div>
+          <div class="val market" id="mktVal">$2,500</div>
+          <div class="note" id="mktZar">≈ R46,000 at typical agency rates</div>
+        </div>
+        <div class="res-line">
+          <div class="lbl">Your Matrix WebWorks investment</div>
+          <div class="val" id="mwwVal">R3,500</div>
+          <div class="note">Fixed price, no hourly billing</div>
+        </div>
+        <div class="savings" id="saveLine">You keep over 90% of the agency price in your pocket</div>
+        <a href="#contact" class="btn btn-primary" style="display:block;text-align:center" id="quoteBtn">Lock In This Quote</a>
+        <p class="disclaimer">Market value reflects typical international agency pricing for an equivalent scope, capped at $30,000. Final Matrix WebWorks quote is confirmed after a scoping call.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap">
+    <span class="kicker">Why Matrix WebWorks</span>
+    <h2>We build for our own ventures first</h2>
+    <p class="sub">Matrix WebWorks is the design and digital engine of the Njomane Empires ecosystem. The same systems we sell are the systems running our own publishing house and education movement.</p>
+    <div class="proof-grid">
+      <div class="card">
+        <h3 style="margin-top:0">Sibani Publishers</h3>
+        <p>Independent publishing house with international digital distribution via Draft2Digital; its digital presence is built in-house by Matrix WebWorks.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Think Rich, Grow Wise</h3>
+        <p>Flagship financial literacy book with 100+ copies sold and corporate buyers including BMW and Audi Park; covered by Northern Natal News and The Citizen.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Money &amp; Mindset Movement</h3>
+        <p>Financial literacy programmes for schools and communities, growing the @trgwcollectives platform across TikTok, YouTube, X and Pinterest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" style="padding-top:0">
+  <div class="wrap">
+    <span class="kicker">How It Works</span>
+    <h2>From brief to launch in four steps</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Scope</h3>
+        <p>A short call or WhatsApp exchange to confirm your goals, content and package. You get a fixed quote in writing.</p>
+      </div>
+      <div class="step">
+        <h3>Design</h3>
+        <p>We design your pages and brand assets, then walk you through them. Your revision rounds happen here.</p>
+      </div>
+      <div class="step">
+        <h3>Build</h3>
+        <p>Your approved design becomes a fast, mobile-first website with everything connected and tested.</p>
+      </div>
+      <div class="step">
+        <h3>Launch &amp; Care</h3>
+        <p>We go live, hand over access and documentation, and keep the site healthy if you take a care plan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-band">
+  <div class="wrap">
+    <span class="kicker">Start a Project</span>
+    <h2>Get your fixed quote this week</h2>
+    <p class="sub" style="margin:0 auto">Send us your project type and the add-ons from your estimate. You will receive a written quote and timeline within 48 hours.</p>
+    <a class="btn btn-primary" href="mailto:mpilenhlemhlongo7@icloud.com?subject=Matrix%20WebWorks%20Project%20Enquiry" id="mailBtn">Email Matrix WebWorks</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>© <span id="yr"></span> Matrix WebWorks. Part of the Njomane Empires ecosystem.</div>
+    <div>Founded by Melokuhle Nsizwa Mhlongo · Newcastle, KwaZulu-Natal</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var ZAR_PER_USD = 18.5;
+  var MARKET_CAP_USD = 30000;
+
+  var typeChoices = document.querySelectorAll('#typeRow .choice');
+  var addons = document.querySelectorAll('.addon input');
+  var mktVal = document.getElementById('mktVal');
+  var mktZar = document.getElementById('mktZar');
+  var mwwVal = document.getElementById('mwwVal');
+  var saveLine = document.getElementById('saveLine');
+  var mailBtn = document.getElementById('mailBtn');
+  var quoteBtn = document.getElementById('quoteBtn');
+
+  function fmt(n){ return n.toLocaleString('en-US'); }
+
+  function activeType(){
+    for (var i=0;i<typeChoices.length;i++){
+      if (typeChoices[i].classList.contains('active')) return typeChoices[i];
+    }
+    return typeChoices[0];
+  }
+
+  function calc(){
+    var t = activeType();
+    var mww = parseInt(t.getAttribute('data-mww'),10);
+    var mkt = parseInt(t.getAttribute('data-mkt'),10);
+    var picked = [];
+    addons.forEach(function(a){
+      if (a.checked){
+        mww += parseInt(a.getAttribute('data-mww'),10);
+        mkt += parseInt(a.getAttribute('data-mkt'),10);
+        picked.push(a.parentElement.querySelector('.a-name').textContent);
+      }
+    });
+    var capped = mkt > MARKET_CAP_USD;
+    var mktShown = Math.min(mkt, MARKET_CAP_USD);
+    mktVal.textContent = '$' + fmt(mktShown) + (capped ? '+' : '');
+    mktZar.textContent = '≈ R' + fmt(Math.round(mktShown * ZAR_PER_USD)) + ' at typical agency rates';
+    mwwVal.textContent = 'R' + fmt(mww);
+    var mktInZar = mktShown * ZAR_PER_USD;
+    var savePct = Math.max(0, Math.round((1 - (mww / mktInZar)) * 100));
+    saveLine.textContent = 'You keep about ' + savePct + '% of the agency price in your pocket';
+
+    var typeName = t.querySelector('strong').textContent;
+    var body = 'Hello Matrix WebWorks,%0D%0A%0D%0AI used your value estimator and I would like a quote.%0D%0A%0D%0AProject type: ' + encodeURIComponent(typeName) +
+      '%0D%0AAdd-ons: ' + encodeURIComponent(picked.length ? picked.join(', ') : 'None') +
+      '%0D%0AEstimated investment: R' + fmt(mww) +
+      '%0D%0A%0D%0AMy business: %0D%0AMy timeline: ';
+    var href = 'mailto:mpilenhlemhlongo7@icloud.com?subject=Matrix%20WebWorks%20Quote%20Request&body=' + body;
+    quoteBtn.setAttribute('href', href);
+  }
+
+  typeChoices.forEach(function(c){
+    c.addEventListener('click', function(){
+      typeChoices.forEach(function(x){ x.classList.remove('active'); });
+      c.classList.add('active');
+      c.querySelector('input').checked = true;
+      calc();
+    });
+  });
+  addons.forEach(function(a){ a.addEventListener('change', calc); });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  calc();
+})();
+</script>
+
+</body>
+</html>
