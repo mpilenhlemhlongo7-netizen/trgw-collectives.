@@ -15,7 +15,7 @@ The official Sibani brand board, the print-ready wraparound cover PDF for Think 
 
 ## What is actually built (Phase 1)
 
-- `index.html` — full flagship home page: hero, About, Catalogue, Five Pocket Wealth System, Money & Mindset Movement (with field photo gallery), Contact.
+- `index.html` — full flagship home page: hero, About, Catalogue, Five Pocket Wealth System (with an embedded 45s explainer video), Money & Mindset Movement (with field photo gallery), Contact.
 - `css/style.css` — complete design system on the real brand tokens, components, responsive breakpoints, reduced-motion handling.
 - `js/main.js` — sticky nav, mobile menu, scroll-reveal (IntersectionObserver), magnetic buttons, animated stat counters, contact form category hints. CSS-only drifting dust particles over the hero photo for cinematic texture (`prefers-reduced-motion` disables them).
 - SEO: meta description, canonical, Open Graph, Twitter Card, `Organization` and `Book` JSON-LD (now including the real ISBN and cover image URL), `robots.txt`, `sitemap.xml`.
@@ -32,7 +32,14 @@ Every statistic and claim on this page comes from CLAUDE.md's verified proof poi
 
 ## Deploying
 
-Same pattern as `matrix-webworks/`: drag-and-drop the folder to Netlify, or connect this repo and set the publish directory to `sibani-publishers`. Forms work automatically once Netlify detects the `data-netlify="true"` form on deploy.
+The Netlify project already exists: **sibani-publishers** (site id `669108d6-4c98-493b-a100-6297dd1d3077`), live at `https://sibani-publishers.netlify.app`. To push a new deploy:
+
+1. Pull the latest `sibani-publishers/` folder from this repo (branch `claude/create-claud-md-0y5cec`) — either `git pull` a local clone, or download it as a ZIP from GitHub's **Code → Download ZIP** on that folder.
+2. Go to `app.netlify.com/projects/sibani-publishers` → **Deploys**.
+3. Drag the `sibani-publishers` folder (the one with `index.html` directly inside it) onto the drop area. Netlify uploads and publishes in about 10–20 seconds.
+4. Confirm the deploy under **Forms** in the dashboard — Netlify should auto-detect the `data-netlify="true"` contact form on this deploy. If a submission doesn't show up under Forms after a real test, the form needs re-registering (redeploy usually fixes it).
+
+Same drag-and-drop pattern as `matrix-webworks/`. A CLI/API deploy is also possible via the Netlify MCP connector, but it requires exposing a live auth token in a shell command — not done from an agent session for security reasons; run it yourself if preferred.
 
 ## Open item carried from CLAUDE.md
 
@@ -50,4 +57,8 @@ assets/images/
   proof-corporate-handoff.jpg  field gallery
   proof-city-skyline.jpg       field gallery
   proof-event-banner.jpg       held for future media/press page, not currently placed
+
+assets/video/
+  five-pocket-wealth-system.mp4         45s TRGW explainer reel, embedded in the Five Pocket Wealth System section
+  five-pocket-wealth-system-poster.jpg  static poster frame shown before playback
 ```
