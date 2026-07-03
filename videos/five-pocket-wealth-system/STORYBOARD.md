@@ -16,7 +16,7 @@ audience: young South Africans, students and first-time earners, on TikTok / You
 
 - scene: The rhetorical question types on, word by word, on a bare navy field
 - voiceover: "What if the real barrier to success — isn't money? But the mindset — you've inherited?"
-- duration: 4.5s
+- duration: 5.12s
 - transition_in: cut
 - status: outline
 - src: compositions/frames/01-hook.html
@@ -39,7 +39,7 @@ Scene 3 (3.0–4.5s): "But the mindset you've inherited?" builds in beneath in o
 
 - scene: "THE FIVE POCKET WEALTH SYSTEM" title card builds from the book's own name, then settles
 - voiceover: "Meet the Five Pocket Wealth System — from Think Rich, Grow Wise."
-- duration: 4s
+- duration: 4.203s
 - transition_in: crossfade
 - status: outline
 - src: compositions/frames/02-intro.html
@@ -62,7 +62,7 @@ Scene 3 (3.2–4.0s): "from Think Rich, Grow Wise" caption fades in below in ora
 
 - scene: "15%" counts up inside a single pocket shape as "OWNER'S EQUITY" labels it
 - voiceover: "First — Owner's Equity. Fifteen percent — pays you, for being the owner."
-- duration: 4.5s
+- duration: 4.373s
 - transition_in: push-slide UP
 - status: outline
 - src: compositions/frames/03-owners-equity.html
@@ -86,7 +86,7 @@ Scene 3 (3.2–4.5s): "PAYS YOU, FOR BEING THE OWNER" caption builds below in or
 
 - scene: "20%" counts up in the second pocket as "LEARN & GROW" labels it
 - voiceover: "Learn and Grow — twenty percent — buys you knowledge, before it buys you things."
-- duration: 4s
+- duration: 5.163s
 - transition_in: push-slide UP
 - status: outline
 - src: compositions/frames/04-learn-grow.html
@@ -109,7 +109,7 @@ Scene 3 (2.8–4.0s): "BUYS YOU KNOWLEDGE, BEFORE IT BUYS YOU THINGS" caption bu
 
 - scene: "15%" counts up in the third pocket as "PETTY CASH" labels it
 - voiceover: "Petty Cash — fifteen percent — for the small stuff. Guilt-free."
-- duration: 3.5s
+- duration: 3.819s
 - transition_in: push-slide UP
 - status: outline
 - src: compositions/frames/05-petty-cash.html
@@ -132,7 +132,7 @@ Scene 3 (2.4–3.5s): "FOR THE SMALL STUFF. GUILT-FREE." caption builds, a touch
 
 - scene: "25%" counts up in the fourth pocket as "REINVESTMENT" labels it, largest ring so far
 - voiceover: "Reinvestment — twenty-five percent — goes back into what's already working."
-- duration: 4s
+- duration: 4.629s
 - transition_in: push-slide UP
 - status: outline
 - src: compositions/frames/06-reinvestment.html
@@ -155,7 +155,7 @@ Scene 3 (2.8–4.0s): "GOES BACK INTO WHAT'S ALREADY WORKING" caption builds bel
 
 - scene: "25%" counts up in the fifth pocket as "EMERGENCY FUND" labels it, matching Reinvestment's size
 - voiceover: "And Emergency Fund — twenty-five percent — so a bad month never breaks you."
-- duration: 4s
+- duration: 4.736s
 - transition_in: push-slide UP
 - status: outline
 - src: compositions/frames/07-emergency-fund.html
@@ -178,7 +178,7 @@ Scene 3 (2.8–4.0s): "SO A BAD MONTH NEVER BREAKS YOU" caption builds; hold a t
 
 - scene: All five pockets assemble into one full ring / bar, labelled and complete
 - voiceover: "Five pockets. One system. Every rand — already has a job."
-- duration: 4.5s
+- duration: 4.352s
 - transition_in: crossfade
 - status: outline
 - src: compositions/frames/08-recap.html
@@ -201,7 +201,7 @@ Scene 3 (3.0–4.5s): "EVERY RAND ALREADY HAS A JOB" caption builds below; the w
 
 - scene: "@trgwcollectives" and "Think Rich, Grow Wise" build into a closing lockup
 - voiceover: "Follow @trgwcollectives — and get Think Rich, Grow Wise, by Melokuhle Nsizwa Mhlongo."
-- duration: 5s
+- duration: 8.128s
 - transition_in: crossfade
 - status: outline
 - src: compositions/frames/09-cta.html

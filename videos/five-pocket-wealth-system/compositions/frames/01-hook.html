@@ -1,0 +1,268 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- head is metadata for the source file only; the runtime discards it -->
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo Black";
+          src: url("assets/fonts/archivo-black-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-700.woff2") format("woff2");
+          font-weight: 700;
+          font-style: normal;
+        }
+
+        /* Root — styled by #root only (never a class on the data-composition-id element). */
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          container-type: size;
+          font-family: "Archivo Black", sans-serif;
+        }
+
+        /* Full-bleed navy ground — a dedicated class="clip" layer, never painted on #root. */
+        #h01-bg {
+          position: absolute;
+          inset: 0;
+          background: #0c1b32;
+        }
+
+        /* Faint hairline grid ambient — dimmed background texture, static (camera-locked shot). */
+        #h01-grid {
+          position: absolute;
+          inset: 0;
+          opacity: 0.3;
+          background-image:
+            repeating-linear-gradient(
+              to right,
+              rgba(250, 248, 242, 0.07) 0px,
+              rgba(250, 248, 242, 0.07) 1px,
+              transparent 1px,
+              transparent 120px
+            ),
+            repeating-linear-gradient(
+              to bottom,
+              rgba(250, 248, 242, 0.07) 0px,
+              rgba(250, 248, 242, 0.07) 1px,
+              transparent 1px,
+              transparent 120px
+            );
+        }
+
+        /* Hook-line stack — the foreground subject, built in three type beats. */
+        #h01-stack {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          padding: 25cqh 8cqw 0 8cqw;
+          box-sizing: border-box;
+          gap: 3cqh;
+        }
+
+        .h01-line {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: baseline;
+          row-gap: 0.12em;
+          column-gap: 0.32em;
+          width: 100%;
+          text-transform: uppercase;
+          line-height: 0.92;
+          letter-spacing: -0.01em;
+          font-weight: 400; /* Archivo Black ships weight 400 only */
+        }
+
+        #h01-line1 {
+          font-size: 6.4cqw;
+          color: #faf8f2; /* cream */
+        }
+
+        #h01-line2 {
+          font-size: 10.6cqw;
+          color: #a6ce39; /* lime accent */
+        }
+
+        #h01-line3 {
+          font-size: 6.6cqw;
+          color: #ce712c; /* orange accent */
+        }
+
+        .h01-word {
+          display: inline-block;
+        }
+
+        .h01-money-cluster {
+          display: inline-flex;
+          align-items: baseline;
+        }
+
+        .h01-money-wrap {
+          position: relative;
+          display: inline-block;
+        }
+
+        .h01-money {
+          position: relative;
+          display: inline-block;
+        }
+
+        .h01-strike {
+          position: absolute;
+          left: -0.02em;
+          right: -0.02em;
+          top: 50%;
+          margin-top: -0.045em; /* vertical centering via margin, not transform, to avoid
+                                    conflicting with the GSAP scaleX transform below */
+          height: 0.09em;
+          background: #faf8f2; /* cream — reads clearly across the lime word */
+          transform: scaleX(0);
+          transform-origin: left center;
+        }
+
+        .h01-qmark {
+          display: inline-block;
+        }
+      </style>
+
+      <div id="root" data-composition-id="01-hook" data-width="1080" data-height="1920">
+        <div
+          id="h01-bg"
+          class="clip"
+          data-start="0"
+          data-duration="5.12"
+          data-track-index="0"
+        ></div>
+
+        <div
+          id="h01-grid"
+          class="clip"
+          data-start="0"
+          data-duration="5.12"
+          data-track-index="1"
+        ></div>
+
+        <div
+          id="h01-stack"
+          class="clip"
+          data-start="0"
+          data-duration="5.12"
+          data-track-index="2"
+        >
+          <!-- Scene 1 (0.0-1.8s): types on word-by-word, cream on navy. -->
+          <div class="h01-line" id="h01-line1">
+            <span class="h01-word">WHAT</span>
+            <span class="h01-word">IF</span>
+            <span class="h01-word">THE</span>
+            <span class="h01-word">REAL</span>
+            <span class="h01-word">BARRIER</span>
+            <span class="h01-word">TO</span>
+            <span class="h01-word">SUCCESS</span>
+          </div>
+
+          <!-- Scene 2 (1.8-3.0s): hard-cuts in, lime, one size step larger; "MONEY" strike-wiped. -->
+          <div class="h01-line" id="h01-line2">
+            <span class="h01-word">ISN'T</span>
+            <span class="h01-word h01-money-cluster">
+              <span class="h01-money-wrap">
+                <span class="h01-money">MONEY</span>
+                <span class="h01-strike" id="h01-strike"></span>
+              </span>
+              <span class="h01-qmark">?</span>
+            </span>
+          </div>
+
+          <!-- Scene 3 (3.0-4.5s): builds in word-by-word beneath, orange; holds with faint jitter. -->
+          <div class="h01-line" id="h01-line3">
+            <span class="h01-word">BUT</span>
+            <span class="h01-word">THE</span>
+            <span class="h01-word">MINDSET</span>
+            <span class="h01-word">YOU'VE</span>
+            <span class="h01-word">INHERITED?</span>
+          </div>
+        </div>
+      </div>
+
+      <script src="assets/js/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        // ---- Scene 1 (0.0-1.8s): "WHAT IF THE REAL BARRIER TO SUCCESS" types on word by word.
+        // Rule: kinetic-beat-slam-style per-word staggered reveal (discrete-text-sequence's
+        // "replace state at time thresholds" idea applied at word granularity via pre-laid-out
+        // spans, so wrapping never reflows mid-build — layout-stable per determinism-rules.md).
+        tl.fromTo(
+          "#h01-line1 .h01-word",
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.22, ease: "power3.out", stagger: 0.21 },
+          0.05,
+        );
+
+        // ---- Scene 2 (1.8-3.0s): "ISN'T MONEY?" hard-cuts in (flash, no fade/slide) in lime.
+        tl.fromTo(
+          "#h01-line2",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.06, ease: "none" },
+          1.8,
+        );
+
+        // "MONEY" gets a quick strike-wipe, as if crossed out on the beat (css-marker-patterns:
+        // sketchout single-line draw via scaleX, timed just after the word lands).
+        tl.fromTo(
+          "#h01-strike",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.32, ease: "power3.out" },
+          2.25,
+        );
+
+        // ---- Scene 3 (3.0-4.5s): "BUT THE MINDSET YOU'VE INHERITED?" builds in beneath, orange.
+        tl.fromTo(
+          "#h01-line3 .h01-word",
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.22, ease: "power3.out", stagger: 0.19 },
+          3.05,
+        );
+
+        // Full three-line stack holds still once the build lands (~4.03s) — faint jitter only
+        // (sine-wave-loop rule, low end of its amplitude range, deterministic phase-driven onUpdate).
+        const h01Stack = document.getElementById("h01-stack");
+        const h01Phase = { p: 0 };
+        tl.to(
+          h01Phase,
+          {
+            p: Math.PI * 1.3,
+            duration: 0.45,
+            ease: "none",
+            onUpdate: () => {
+              const y = Math.sin(h01Phase.p) * 2.2;
+              const scale = 1 + Math.sin(h01Phase.p) * 0.01;
+              h01Stack.style.transform = `translateY(${y}px) scale(${scale})`;
+            },
+          },
+          4.03,
+        );
+
+        window.__timelines["01-hook"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

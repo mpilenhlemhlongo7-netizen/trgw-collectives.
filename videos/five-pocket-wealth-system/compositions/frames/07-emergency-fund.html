@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>07 — Emergency Fund</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo Black";
+          src: url("assets/fonts/archivo-black-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-700.woff2") format("woff2");
+          font-weight: 700;
+          font-style: normal;
+        }
+
+        #root {
+          position: relative;
+          width: 1080px;
+          height: 1920px;
+          overflow: hidden;
+          container-type: size;
+          font-family: "JetBrains Mono", monospace;
+        }
+
+        .clip {
+          position: absolute;
+          inset: 0;
+        }
+
+        /* ---- background ground ---- */
+        .fr07-bg {
+          background: #0c1b32;
+        }
+
+        /* ---- stage ---- */
+        .fr07-stage {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .fr07-strip {
+          position: relative;
+          width: 100%;
+          padding: 6.5cqw 6cqw 4cqw;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-bottom: 0.3cqw solid rgba(250, 248, 242, 0.18);
+        }
+
+        .fr07-label-wrap {
+          width: 82cqw;
+          text-align: center;
+          white-space: nowrap;
+        }
+
+        .fr07-label {
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 3.3cqw;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #faf8f2;
+        }
+
+        .fr07-cursor {
+          display: inline-block;
+          width: 0.3em;
+          margin-left: 0.05em;
+          color: #a6ce39;
+        }
+
+        .fr07-pill {
+          position: absolute;
+          top: 5cqw;
+          right: 6cqw;
+          background: #faf8f2;
+          border: 0.25cqw solid #0c1b32;
+          border-radius: 999px;
+          padding: 0.9cqw 2.4cqw;
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 700;
+          font-size: 2cqw;
+          letter-spacing: 0.06em;
+          color: #0c1b32;
+          opacity: 0;
+          transform: scale(0);
+          transform-origin: 100% 0%;
+          will-change: transform;
+        }
+
+        .fr07-ring-outer {
+          margin-top: 29.4cqw;
+          width: 62cqw;
+          height: 62cqw;
+          position: relative;
+          display: grid;
+          place-items: center;
+          opacity: 0;
+          transform: scale(0);
+          transform-origin: 50% 50%;
+          will-change: transform;
+        }
+
+        .fr07-ring-svg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          transform: rotate(-90deg);
+        }
+
+        .fr07-ring-track {
+          fill: none;
+          stroke: rgba(250, 248, 242, 0.22);
+          stroke-width: 16;
+        }
+
+        .fr07-ring-fill {
+          fill: none;
+          stroke: #a6ce39;
+          stroke-width: 16;
+          stroke-linecap: round;
+        }
+
+        .fr07-ring-number {
+          position: relative;
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          width: 42cqw;
+        }
+
+        .fr07-counter {
+          font-family: "Archivo Black", sans-serif;
+          font-weight: 400;
+          color: #faf8f2;
+          font-variant-numeric: tabular-nums;
+          font-size: 6.5cqw;
+          line-height: 1;
+          letter-spacing: -0.01em;
+        }
+
+        .fr07-suffix {
+          font-family: "Archivo Black", sans-serif;
+          font-weight: 400;
+          color: #a6ce39;
+          font-size: 4cqw;
+          margin-left: 0.4cqw;
+          opacity: 0;
+          transform: scale(0.4);
+          transform-origin: 0% 100%;
+          will-change: transform;
+        }
+
+        .fr07-caption {
+          margin-top: 10cqw;
+          width: 78cqw;
+          text-align: center;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.5em 0.45em;
+        }
+
+        .fr07-cap-word {
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 700;
+          font-size: 2.5cqw;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #ce712c;
+          opacity: 0;
+          transform: translateY(16px);
+          will-change: transform, opacity;
+        }
+      </style>
+
+      <div
+        id="root"
+        data-composition-id="07-emergency-fund"
+        data-width="1080"
+        data-height="1920"
+        data-duration="4.736"
+      >
+        <div id="fr07-bg" class="clip fr07-bg" data-start="0" data-duration="4.736" data-track-index="0"></div>
+
+        <div id="fr07-stage" class="clip fr07-stage" data-start="0" data-duration="4.736" data-track-index="1">
+          <div class="fr07-strip">
+            <div class="fr07-label-wrap">
+              <span class="fr07-label" id="fr07-label-text"></span><span class="fr07-cursor" id="fr07-cursor">|</span>
+            </div>
+            <div class="fr07-pill" id="fr07-pill">5/5</div>
+          </div>
+
+          <div class="fr07-ring-outer" id="fr07-ring-outer">
+            <svg class="fr07-ring-svg" viewBox="0 0 240 240">
+              <circle class="fr07-ring-track" cx="120" cy="120" r="100" />
+              <circle class="fr07-ring-fill" id="fr07-ring-fill" cx="120" cy="120" r="100" />
+            </svg>
+            <div class="fr07-ring-number">
+              <span class="fr07-counter" id="fr07-counter">0</span><span class="fr07-suffix" id="fr07-suffix">%</span>
+            </div>
+          </div>
+
+          <div class="fr07-caption" id="fr07-caption">
+            <span class="fr07-cap-word">SO</span>
+            <span class="fr07-cap-word">A</span>
+            <span class="fr07-cap-word">BAD</span>
+            <span class="fr07-cap-word">MONTH</span>
+            <span class="fr07-cap-word">NEVER</span>
+            <span class="fr07-cap-word">BREAKS</span>
+            <span class="fr07-cap-word">YOU</span>
+          </div>
+        </div>
+      </div>
+
+      <script src="assets/js/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        // ---------- Scene 1 (0.0–1.2s): hero ring pops in, label types on ----------
+        const RING_POP_AT = 0.0;
+        const RING_POP_DUR = 0.45;
+        tl.fromTo(
+          "#fr07-ring-outer",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: RING_POP_DUR, ease: "power3.out" },
+          RING_POP_AT
+        );
+
+        const LABEL_TEXT = "EMERGENCY FUND";
+        const LABEL_START = 0.15;
+        const LABEL_TYPE_DUR = 0.85;
+        const labelEl = document.getElementById("fr07-label-text");
+        const labelState = { v: 0 };
+        tl.to(
+          labelState,
+          {
+            v: LABEL_TEXT.length,
+            duration: LABEL_TYPE_DUR,
+            ease: "power1.inOut",
+            onUpdate: () => {
+              labelEl.textContent = LABEL_TEXT.substring(0, Math.floor(labelState.v));
+            },
+          },
+          LABEL_START
+        );
+
+        // Cursor blink while typing (deterministic sine), then fades out.
+        const cursorEl = document.getElementById("fr07-cursor");
+        const blink = { p: 0 };
+        tl.to(
+          blink,
+          {
+            p: Math.PI * 2 * 2.5,
+            duration: LABEL_TYPE_DUR,
+            ease: "none",
+            onUpdate: () => {
+              cursorEl.style.opacity = Math.sin(blink.p) > 0 ? "1" : "0";
+            },
+          },
+          LABEL_START
+        );
+        tl.to(cursorEl, { opacity: 0, duration: 0.2, ease: "power1.out" }, LABEL_START + LABEL_TYPE_DUR);
+
+        // ---------- Scene 2 (1.2–2.8s): ring fills lime, count-up 0→25, "5/5" completes ----------
+        const FILL_START = 1.2;
+        const FILL_DUR = 1.4;
+        const TARGET_PCT = 0.25;
+        const ringFill = document.getElementById("fr07-ring-fill");
+        const ringLen = ringFill.getTotalLength();
+        ringFill.style.strokeDasharray = `${ringLen}`;
+        ringFill.style.strokeDashoffset = `${ringLen}`;
+        tl.to(
+          ringFill,
+          {
+            strokeDashoffset: ringLen * (1 - TARGET_PCT),
+            duration: FILL_DUR,
+            ease: "power2.out",
+          },
+          FILL_START
+        );
+
+        const counterEl = document.getElementById("fr07-counter");
+        const START_SIZE = 6.5; // cqw
+        const END_SIZE = 13; // cqw
+        const countState = { value: 0, size: START_SIZE };
+        tl.to(
+          countState,
+          {
+            value: 25,
+            size: END_SIZE,
+            duration: FILL_DUR,
+            ease: "power2.out",
+            onUpdate: () => {
+              counterEl.textContent = Math.round(countState.value);
+              counterEl.style.fontSize = `${countState.size}cqw`;
+            },
+          },
+          FILL_START
+        );
+
+        const SUFFIX_START = FILL_START + FILL_DUR;
+        tl.fromTo(
+          "#fr07-suffix",
+          { opacity: 0, scale: 0.4 },
+          { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.6)" },
+          SUFFIX_START
+        );
+
+        // "5/5" marker pips in, landing as the count completes.
+        const PILL_START = 2.35;
+        tl.fromTo(
+          "#fr07-pill",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" },
+          PILL_START
+        );
+
+        // ---------- Scene 3 (2.8–4.0s): caption builds, then a longer settled hold ----------
+        const CAPTION_START = 2.85;
+        const CAPTION_STAGGER = 0.05;
+        const CAPTION_WORD_DUR = 0.4;
+        const words = gsap.utils.toArray(".fr07-cap-word");
+        words.forEach((w, i) => {
+          tl.fromTo(
+            w,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: CAPTION_WORD_DUR, ease: "power3.out" },
+            CAPTION_START + i * CAPTION_STAGGER
+          );
+        });
+
+        // Faint jitter on the settled ring — subtle life, no drift, low amplitude.
+        const IDLE_START = 0.55;
+        const IDLE_DUR = 4 - IDLE_START;
+        const CYCLES = 1.25;
+        const ringOuter = document.getElementById("fr07-ring-outer");
+        const phase = { p: 0 };
+        tl.to(
+          phase,
+          {
+            p: Math.PI * 2 * CYCLES,
+            duration: IDLE_DUR,
+            ease: "none",
+            onUpdate: () => {
+              const s = 1 + Math.sin(phase.p) * 0.012;
+              const y = Math.sin(phase.p) * 2.5;
+              ringOuter.style.transform = `translateY(${y}px) scale(${s})`;
+            },
+          },
+          IDLE_START
+        );
+
+        window.__timelines["07-emergency-fund"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

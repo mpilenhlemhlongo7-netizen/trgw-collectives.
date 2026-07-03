@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- head is metadata for the source file only; the runtime discards everything
+         outside <template> — see hyperframes-core/references/sub-compositions.md -->
+    <title>Frame 3 — Owner's Equity</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo Black";
+          src: url("assets/fonts/archivo-black-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-700.woff2") format("woff2");
+          font-weight: 700;
+          font-style: normal;
+        }
+
+        /* Root — styled by #root, never a class (subcomposition_root_styled_by_class). */
+        #root {
+          position: relative;
+          width: 1080px;
+          height: 1920px;
+          overflow: hidden;
+          container-type: size;
+          font-family: "JetBrains Mono", monospace;
+        }
+
+        /* Full-bleed ground — its own class="clip" layer, never painted on #root. */
+        .bg {
+          position: absolute;
+          inset: 0;
+          background: #0c1b32; /* ink navy — full-bleed ground */
+        }
+
+        .content {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        /* --- Full-width strip / stage header (shared across Frames 3-7) --- */
+        .strip {
+          width: 100%;
+          margin-top: 9cqh;
+          padding: 1.7cqh 0;
+          background: #faf8f2; /* cream card field */
+          border-top: 0.4cqw solid #0c1b32;
+          border-bottom: 0.4cqw solid #0c1b32;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transform-origin: 50% 50%;
+          will-change: transform;
+        }
+
+        .kicker {
+          width: 16ch;
+          white-space: nowrap;
+          text-align: left;
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 1.25cqw;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #0c1b32; /* ink on cream */
+        }
+
+        /* --- "1/5" progress marker — the frame's one pill chip --- */
+        .marker {
+          position: absolute;
+          top: 16.4cqh;
+          right: 6cqw;
+          padding: 0.9cqh 2.6cqw;
+          background: #faf8f2;
+          border: 0.2cqw solid #0c1b32;
+          border-radius: 999px;
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 1.25cqw;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #ce712c; /* secondary accent — supporting mark */
+          transform-origin: 50% 50%;
+          will-change: transform;
+        }
+
+        /* --- Stage: centered-ring template --- */
+        .stage {
+          margin-top: 7cqh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        .ring-wrap {
+          position: relative;
+          width: 45cqw;
+          height: 45cqw;
+          transform-origin: 50% 50%;
+          will-change: transform;
+        }
+
+        .ring {
+          display: block;
+          width: 100%;
+          height: 100%;
+          transform: rotate(-90deg); /* fill starts at 12 o'clock */
+        }
+
+        .ring-track {
+          fill: none;
+          stroke: rgba(250, 248, 242, 0.18);
+          stroke-width: 7;
+        }
+
+        .ring-fill {
+          fill: none;
+          stroke: #a6ce39; /* primary accent — odd pocket */
+          stroke-width: 7;
+          stroke-linecap: round;
+        }
+
+        .stat-value {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          gap: 0.6cqw;
+        }
+
+        .counter {
+          font-family: "Archivo Black", sans-serif;
+          font-weight: 400;
+          color: #a6ce39;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.02em;
+          line-height: 0.84;
+          font-size: 86.4px; /* 8cqw @ 1080 root width — GSAP tweens this inline */
+        }
+
+        .counter-suffix {
+          font-family: "Archivo Black", sans-serif;
+          font-weight: 400;
+          color: #ce712c;
+          font-size: 9cqw;
+          line-height: 0.84;
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        /* --- Caption build --- */
+        .caption {
+          margin-top: 6cqh;
+          max-width: 78cqw;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          row-gap: 0.8cqh;
+          column-gap: 0.8cqw;
+        }
+
+        .word {
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 1.25cqw;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #ce712c; /* secondary accent — caption */
+        }
+      </style>
+
+      <div
+        id="root"
+        data-composition-id="03-owners-equity"
+        data-width="1080"
+        data-height="1920"
+        data-duration="4.5"
+      >
+        <div id="bg" class="clip bg" data-start="0" data-duration="4.5" data-track-index="0"></div>
+
+        <div id="content" class="clip content" data-start="0" data-duration="4.5" data-track-index="1">
+          <div class="strip" id="strip">
+            <div class="kicker" id="kicker"></div>
+          </div>
+
+          <div class="marker" id="marker">1/5</div>
+
+          <div class="stage">
+            <div class="ring-wrap" id="ringWrap">
+              <svg class="ring" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle class="ring-track" cx="50" cy="50" r="42" />
+                <circle class="ring-fill" id="ringFill" cx="50" cy="50" r="42" />
+              </svg>
+              <div class="stat-value">
+                <span class="counter" id="counter">0</span
+                ><span class="counter-suffix" id="suffix">%</span>
+              </div>
+            </div>
+
+            <div class="caption" id="caption">
+              <span class="word">PAYS</span>
+              <span class="word">YOU,</span>
+              <span class="word">FOR</span>
+              <span class="word">BEING</span>
+              <span class="word">THE</span>
+              <span class="word">OWNER</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="assets/js/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+        const tl = gsap.timeline({ paused: true });
+
+        // Root width is fixed/deterministic at 1080px — cqw-derived px are hardcoded
+        // where JS drives the value directly (font-size onUpdate can't read cqw).
+        const ROOT_W = 1080;
+        const CQW = ROOT_W / 100;
+        const COUNT_START_SIZE = 8 * CQW; // 86.4px
+        const COUNT_END_SIZE = 15.5 * CQW; // 167.4px
+        const TARGET_VALUE = 15;
+
+        // ---- Scene 1 (0.0-1.5s): stage forms, kicker types on, ring sits empty ----
+
+        // Full-width strip unfurls first.
+        tl.fromTo(
+          "#strip",
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.3, ease: "power3.out" },
+          0,
+        );
+
+        // Ring container pops in early — hero visible by t <= 0.5s.
+        tl.fromTo(
+          "#ringWrap",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" },
+          0.05,
+        );
+
+        // "OWNER'S EQUITY" types on — discrete-text-sequence smooth-slice variation
+        // (continuous typewriter, no edits/pauses). Monospace font is mandatory.
+        const KICKER_TEXT = "OWNER'S EQUITY";
+        const kickerEl = document.getElementById("kicker");
+        const kLen = { v: 0 };
+        tl.to(
+          kLen,
+          {
+            v: KICKER_TEXT.length,
+            duration: 0.9,
+            ease: "power1.inOut",
+            onUpdate: () => {
+              kickerEl.textContent = KICKER_TEXT.substring(0, Math.floor(kLen.v));
+            },
+          },
+          0.15,
+        );
+
+        // ---- Scene 2 (1.5-3.2s): on "fifteen percent" — ring fills + count-up ----
+
+        const ringFill = document.getElementById("ringFill");
+        const LEN = ringFill.getTotalLength(); // measured, never hard-coded
+        ringFill.style.strokeDasharray = `${LEN}`;
+        ringFill.style.strokeDashoffset = `${LEN}`;
+
+        const counterEl = document.getElementById("counter");
+        const counterState = { value: 0, fontSize: COUNT_START_SIZE };
+
+        // Ring fill and the count-up number share start/duration/ease so they land
+        // as one beat (stat-bars-and-fills: "match the number's timing").
+        tl.to(
+          ringFill,
+          {
+            strokeDashoffset: LEN * (1 - TARGET_VALUE / 100),
+            duration: 1.1,
+            ease: "power2.out",
+          },
+          1.5,
+        );
+        tl.to(
+          counterState,
+          {
+            value: TARGET_VALUE,
+            fontSize: COUNT_END_SIZE,
+            duration: 1.1,
+            ease: "power2.out",
+            onUpdate: () => {
+              counterEl.textContent = Math.round(counterState.value);
+              counterEl.style.fontSize = `${counterState.fontSize}px`;
+            },
+          },
+          1.5,
+        );
+
+        // "1/5" marker pips in.
+        tl.fromTo(
+          "#marker",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.4, ease: "power3.out" },
+          1.7,
+        );
+
+        // Suffix slides in after the count lands (counting-dynamic-scale recipe).
+        tl.to(
+          "#suffix",
+          { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.5)" },
+          2.6,
+        );
+
+        // ---- Scene 3 (3.2-4.5s): caption builds, ring holds with faint jitter ----
+
+        const ringWrapEl = document.getElementById("ringWrap");
+        const idlePhase = { p: 0 };
+        // sin(0) = 0 at IDLE_START so there is no jump from the settled entry state.
+        tl.to(
+          idlePhase,
+          {
+            p: Math.PI * 2 * 1,
+            duration: 1.5,
+            ease: "none",
+            onUpdate: () => {
+              const s = 1 + Math.sin(idlePhase.p) * 0.01;
+              const y = Math.sin(idlePhase.p) * 2;
+              ringWrapEl.style.transform = `translateY(${y}px) scale(${s})`;
+            },
+          },
+          3.0,
+        );
+
+        // Caption builds word by word, staggered, on the "pays you" VO cue.
+        const words = gsap.utils.toArray("#caption .word");
+        words.forEach((w, i) => {
+          tl.fromTo(
+            w,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+            3.2 + i * 0.08,
+          );
+        });
+
+        window.__timelines["03-owners-equity"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
