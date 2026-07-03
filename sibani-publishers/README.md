@@ -1,32 +1,34 @@
 # Sibani Publishers Website
 
-Single-page flagship site for Sibani Publishers, built as Phase 1 of the full platform described in the master brief. Static HTML/CSS/JS, no build step, no dependencies beyond CDN-hosted Three.js and Google Fonts.
+Single-page flagship site for Sibani Publishers, built as Phase 1 of the full platform described in the master brief. Static HTML/CSS/JS, no build step, no dependencies beyond CDN-hosted Google Fonts.
+
+## Real brand assets in use
+
+The official Sibani brand board, the print-ready wraparound cover PDF for Think Rich, Grow Wise, and four real photographs of Melokuhle were supplied mid-build and are now the source of truth for the site. Nothing below is a placeholder.
+
+- **Palette**: warm brown `#8B6F47`, sand beige `#C2A77C`, creme white `#F5F1EA`, dark brown `#2E2E2E`, taken directly from the brand board.
+- **Typography**: Cinzel (headings) and Montserrat (body), per the brand board's typography spec.
+- **Logo**: `assets/images/sibani-emblem.png` (transparent, cropped from the brand board for the nav/footer) and `assets/images/sibani-logo-lockup.png` (full mark + wordmark + tagline, used in About).
+- **Book cover**: `assets/images/book-cover-front.jpg`, cropped from the actual print-ready wraparound PDF (`Book_cover.pdf`) supplied for this build. `assets/images/book-cover-wraparound.jpg` holds the full back/spine/front for future use (e.g. a Book Detail page). ISBN 978-1-83492-603-2 is now in the JSON-LD and displayed on the catalogue card, both read directly off the real cover.
+- **Hero**: `assets/images/hero-briefcase-bmw.jpg`, the real photo of Melokuhle in uniform, briefcase in hand, holding Think Rich, Grow Wise at a BMW dealership. This replaced an earlier abstract Three.js scene once the real signature photo was supplied — an authentic photo of the actual brand statement beats a symbolic 3D stand-in.
+- **Field gallery** (Money & Mindset Movement section): three more real photos — the BMW dealership shot, a corporate hand-off photo, and a city-skyline shot — presented as proof-in-the-field photography.
 
 ## What is actually built (Phase 1)
 
-- `index.html` — full flagship home page: hero, About, Catalogue, Five Pocket Wealth System, Money & Mindset Movement, Contact.
-- `css/style.css` — complete design system: colour tokens, type scale (Cormorant Garamond / Inter / Manrope), components, responsive breakpoints, reduced-motion handling.
-- `js/scene.js` — cinematic Three.js hero: gradient sunrise sky, procedural skyline silhouette, receding road, drifting dust particles, animated birds, mouse/scroll parallax. Falls back to a static CSS gradient if WebGL is unavailable or `prefers-reduced-motion` is set.
-- `js/main.js` — sticky nav, mobile menu, scroll-reveal (IntersectionObserver), magnetic buttons, animated stat counters, contact form category hints.
-- SEO: meta description, canonical, Open Graph, Twitter Card, `Organization` and `Book` JSON-LD, `robots.txt`, `sitemap.xml`.
-- Accessibility: skip link, visible focus states, `prefers-reduced-motion` support throughout (3D scene, scroll reveals, smooth scroll all degrade to instant/static), semantic headings, alt text on the emblem placeholder.
+- `index.html` — full flagship home page: hero, About, Catalogue, Five Pocket Wealth System, Money & Mindset Movement (with field photo gallery), Contact.
+- `css/style.css` — complete design system on the real brand tokens, components, responsive breakpoints, reduced-motion handling.
+- `js/main.js` — sticky nav, mobile menu, scroll-reveal (IntersectionObserver), magnetic buttons, animated stat counters, contact form category hints. CSS-only drifting dust particles over the hero photo for cinematic texture (`prefers-reduced-motion` disables them).
+- SEO: meta description, canonical, Open Graph, Twitter Card, `Organization` and `Book` JSON-LD (now including the real ISBN and cover image URL), `robots.txt`, `sitemap.xml`.
+- Accessibility: skip link, visible focus states, `prefers-reduced-motion` support throughout, semantic headings, descriptive alt text on every photo.
 - Netlify-ready contact form with honeypot spam field, `thanks.html` success page, enquiry categorised as General / Publishing / Media / Partnerships / Speaking / Rights / Support, all routed to Melokuhle until departmental contacts exist.
 
 ## What is deliberately NOT built yet, and why
 
-The master brief asks for a full multi-page CMS platform (Authors, individual Book Detail pages, News, Blog, Events, Resources, Media gallery, future store/learning platform/donor portal) plus a photorealistic rigged 3D human character in the hero. Building that honestly requires:
-
-1. **A real logo and cover art file.** Neither exists in this repo. The hero emblem and the Think Rich, Grow Wise cover are typographic placeholders (`S.` mark, navy/gold card) built to swap out the moment real assets are supplied — not a redesign of a logo that doesn't yet exist here.
-2. **A modelled/rigged 3D character or a 2D illustration asset for the boy in uniform.** Hand-authored Three.js cannot conjure a photorealistic animated human without a source model. The hero instead renders the *environment* of the story — road, sunrise, skyline, dust, birds — cinematically, per the "symbolic scene" direction agreed before build.
-3. **A backend/CMS.** A static single page cannot support "unlimited books, unlimited authors, future store" without a database and a framework (Next.js + a headless CMS, most likely). That is a separate, larger engagement, not a single-session addition to a static site.
-
-## Extending to Phase 2
-
-The design system in `style.css` (colour tokens, type scale, component classes) is written to extend cleanly into new pages — a Book Detail template, an Authors page, a News/Blog index — once there is real content to put in them. Recommend scoping that as its own project once cover art, additional titles, and a hosting/CMS decision exist.
+The master brief asks for a full multi-page CMS platform (Authors, individual Book Detail pages, News, Blog, Events, Resources, Media gallery, future store/learning platform/donor portal). That needs a backend and a framework (most likely Next.js + a headless CMS) — a static single page cannot support "unlimited books, unlimited authors, future store" without one. That is scoped as a separate, larger engagement, not a single-session addition to a static site. Per CLAUDE.md's Missing Assets Protocol, the architecture here (design tokens, component classes) is built to extend into that Phase 2 cleanly rather than blocking on it.
 
 ## Verified facts only
 
-Every statistic and claim on this page comes from CLAUDE.md's verified proof points: 283 pages / 57,148 words / 21 chapters / 6 Parts (Second Edition), BMW and Audi Park as corporate buyers, TVET Amajuba engagement, Northern Natal News and The Citizen coverage, Draft2Digital international distribution. Nothing is invented. Future titles are marked "In Development" / "Coming Soon" with no fabricated release dates.
+Every statistic and claim on this page comes from CLAUDE.md's verified proof points or the real cover/photos supplied: 283 pages / 57,148 words / 21 chapters / 6 Parts (Second Edition), ISBN 978-1-83492-603-2, BMW and Audi Park as corporate buyers, TVET Amajuba engagement, Northern Natal News and The Citizen coverage, Draft2Digital international distribution. Nothing is invented. Future titles are marked "In Development" / "Coming Soon" with no fabricated release dates. Field gallery captions describe only what is visibly true in each photo — no company names or claims beyond what's confirmable.
 
 ## Deploying
 
@@ -35,3 +37,17 @@ Same pattern as `matrix-webworks/`: drag-and-drop the folder to Netlify, or conn
 ## Open item carried from CLAUDE.md
 
 "Five Pocket Wealth System" is used throughout per CLAUDE.md's primary naming, but the file flags this as unconfirmed against "Five Pocket Money System" — resolve before this copy is considered final.
+
+## Assets folder
+
+```
+assets/images/
+  sibani-emblem.png            transparent mark, nav + footer
+  sibani-logo-lockup.png       full lockup with tagline, About section
+  book-cover-front.jpg         front cover only, catalogue card
+  book-cover-wraparound.jpg    full back/spine/front, held for a future Book Detail page
+  hero-briefcase-bmw.jpg       signature hero photo
+  proof-corporate-handoff.jpg  field gallery
+  proof-city-skyline.jpg       field gallery
+  proof-event-banner.jpg       held for future media/press page, not currently placed
+```

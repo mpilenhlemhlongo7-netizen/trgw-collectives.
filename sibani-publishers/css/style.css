@@ -3,20 +3,22 @@
    ========================================================================== */
 
 :root {
-  --navy-primary: #0F1E3D;
-  --navy-royal: #1A2E5A;
-  --ivory: #FAF8F2;
-  --cream: #F5F1E8;
-  --gold-antique: #C8A45D;
-  --gold-rich: #D4AF37;
-  --charcoal: #222222;
-  --slate: #596274;
-  --grey-light: #E8E8E8;
+  /* Sibani Publishers official palette, from brand board */
+  --navy-primary: #2E2E2E;   /* dark brown — dark section bg, heading text */
+  --navy-royal: #4A3826;     /* lighter dark brown — gradients, hover */
+  --ivory: #FAF8F2;          /* off-white for pure-white-adjacent surfaces */
+  --cream: #F5F1EA;          /* creme white — primary light bg */
+  --cream-alt: #EFE4D2;      /* tinted creme for section alternation */
+  --gold-antique: #C2A77C;   /* sand beige — secondary accent, hover, borders */
+  --gold-rich: #8B6F47;      /* warm brown — primary accent, buttons, kickers */
+  --charcoal: #2E2E2E;       /* dark brown — body text */
+  --slate: #6B5F52;          /* warm grey-brown — secondary text */
+  --grey-light: #E4DCCB;     /* warm light border */
   --white: #FFFFFF;
 
-  --font-head: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
-  --font-num: 'Manrope', -apple-system, sans-serif;
+  --font-head: 'Cinzel', Georgia, serif;
+  --font-body: 'Montserrat', -apple-system, sans-serif;
+  --font-num: 'Montserrat', -apple-system, sans-serif;
 
   --container: 1240px;
   --gutter: clamp(1.5rem, 5vw, 4rem);
@@ -54,7 +56,7 @@ h1, h2, h3, h4 {
   margin: 0 0 0.5em;
 }
 
-h1 { font-size: clamp(2.75rem, 6vw, 5.25rem); font-weight: 500; }
+h1 { font-size: clamp(2.75rem, 6vw, 5.25rem); font-weight: 600; letter-spacing: 0.01em; }
 h2 { font-size: clamp(2.1rem, 4vw, 3.25rem); }
 h3 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
 
@@ -163,7 +165,7 @@ a { color: inherit; }
 }
 
 .nav.is-scrolled {
-  background: rgba(15, 30, 61, 0.92);
+  background: rgba(46, 46, 46, 0.94);
   backdrop-filter: blur(10px);
   padding: 0.9rem 0;
   box-shadow: 0 8px 30px rgba(0,0,0,0.15);
@@ -177,18 +179,20 @@ a { color: inherit; }
 
 .wordmark {
   font-family: var(--font-head);
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--ivory);
   text-decoration: none;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.65rem;
 }
-.wordmark span {
-  color: var(--gold-rich);
-  font-size: 1.9rem;
+.wordmark img {
+  height: 38px;
+  width: auto;
+  display: block;
 }
 
 .nav-links {
@@ -254,26 +258,63 @@ a { color: inherit; }
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  background: linear-gradient(180deg, #0F1E3D 0%, #1A2E5A 45%, #3d3320 100%);
+  background: var(--navy-primary);
 }
 
-.hero-canvas {
+.hero-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  display: block;
+  object-fit: cover;
+  object-position: 50% 18%;
+  transform: scale(1.08);
+  animation: hero-kenburns 22s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
-.hero.no-webgl .hero-canvas { display: none; }
-.hero.no-webgl {
-  background: radial-gradient(ellipse at 50% 100%, #4a3a1e 0%, #1A2E5A 45%, #0F1E3D 100%);
+@keyframes hero-kenburns {
+  0% { transform: scale(1.08) translateY(0); }
+  100% { transform: scale(1.16) translateY(-1.5%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo { animation: none; transform: scale(1.02); }
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.dust {
+  position: absolute;
+  bottom: -5%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(245, 241, 234, 0.55);
+  animation: dust-rise 9s linear infinite;
+}
+@keyframes dust-rise {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-105vh) translateX(20px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dust { display: none; }
 }
 
 .hero-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15,30,61,0.15) 0%, rgba(15,30,61,0) 40%, rgba(15,30,61,0.75) 100%);
+  background:
+    linear-gradient(180deg, rgba(46,46,46,0.35) 0%, rgba(46,46,46,0.15) 30%, rgba(46,46,46,0.35) 65%, rgba(46,46,46,0.92) 100%),
+    linear-gradient(90deg, rgba(46,46,46,0.55) 0%, rgba(46,46,46,0.05) 55%);
   pointer-events: none;
 }
 
@@ -283,9 +324,10 @@ a { color: inherit; }
   width: 100%;
   padding-bottom: clamp(3rem, 8vw, 6rem);
   color: var(--ivory);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.35);
 }
 
-.hero-content .kicker { color: var(--gold-rich); }
+.hero-content .kicker { color: #e8c896; }
 
 .hero-content h1 {
   color: var(--white);
@@ -296,7 +338,7 @@ a { color: inherit; }
 .hero-content .lede {
   max-width: 46ch;
   font-size: 1.15rem;
-  color: rgba(250,248,242,0.82);
+  color: rgba(250,248,242,0.9);
   margin-bottom: 2.2rem;
 }
 
@@ -376,25 +418,23 @@ a { color: inherit; }
   aspect-ratio: 1;
   border: 1px solid var(--grey-light);
   position: relative;
-  background: var(--white);
+  background: var(--cream);
+  padding: 2.5rem;
 }
-.about-emblem::before,
-.about-emblem::after {
+.about-emblem::before {
   content: '';
   position: absolute;
+  inset: 16px;
   border: 1px solid var(--gold-rich);
+  opacity: 0.4;
 }
-.about-emblem::before { inset: 16px; }
-.about-emblem::after { inset: 16px; opacity: 0.3; transform: rotate(45deg); }
-
-.emblem-mark {
-  font-family: var(--font-head);
-  font-size: 6rem;
-  color: var(--navy-primary);
+.about-emblem img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   position: relative;
   z-index: 1;
 }
-.emblem-mark span { color: var(--gold-rich); }
 
 .about-values {
   display: grid;
@@ -443,44 +483,12 @@ a { color: inherit; }
   .book-feature { grid-template-columns: 1fr; }
 }
 
-.book-cover-placeholder {
-  aspect-ratio: 5 / 8;
-  background: linear-gradient(160deg, var(--navy-primary), var(--navy-royal));
-  color: var(--gold-rich);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1.2rem;
-  border: 1px solid var(--gold-antique);
-  position: relative;
-}
-.book-cover-placeholder .mark {
-  font-family: var(--font-head);
-  font-size: 2.4rem;
-  border: 1px solid var(--gold-rich);
-  border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-.book-cover-placeholder .title {
-  font-family: var(--font-head);
-  font-size: 1.15rem;
-  color: var(--ivory);
-  line-height: 1.2;
-}
-.book-cover-placeholder .sub {
-  font-family: var(--font-num);
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(250,248,242,0.55);
-  margin-top: 0.6rem;
+.book-cover-image {
+  width: 100%;
+  aspect-ratio: 5 / 7.1;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 18px 40px rgba(46,46,46,0.28);
 }
 
 .book-meta {
@@ -649,6 +657,40 @@ a { color: inherit; }
   margin-top: 1.5rem;
 }
 
+/* ---------------------------------- Field Gallery ---------------------------------- */
+
+.field-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+@media (max-width: 860px) {
+  .field-gallery { grid-template-columns: 1fr; }
+}
+.field-photo {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+.field-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+.field-photo:hover img { transform: scale(1.05); }
+.field-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.2rem 1.1rem;
+  background: linear-gradient(180deg, transparent, rgba(46,46,46,0.88));
+  color: var(--ivory);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
 /* ---------------------------------- Contact ---------------------------------- */
 
 .contact-grid {
@@ -704,11 +746,17 @@ a { color: inherit; }
 /* ---------------------------------- Footer ---------------------------------- */
 
 .footer {
-  background: #0a1428;
+  background: #1c1c1c;
   color: rgba(250,248,242,0.6);
   padding: 3rem 0 2rem;
   font-size: 0.85rem;
 }
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.footer-brand img { height: 26px; width: auto; }
 .footer .container {
   display: flex;
   flex-wrap: wrap;
