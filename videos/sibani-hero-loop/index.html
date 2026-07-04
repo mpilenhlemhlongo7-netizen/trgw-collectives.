@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/js/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #2E2E2E;
+      }
+
+      @font-face {
+        font-family: "Cinzel";
+        src: url("assets/fonts/cinzel-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+
+      .bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(115deg, #2E2E2E 0%, #3a2f22 45%, #4A3826 100%);
+      }
+
+      .grid {
+        position: absolute;
+        inset: 0;
+        opacity: 0.05;
+        background-image:
+          repeating-linear-gradient(to right, rgba(245,241,234,0.5) 0px, rgba(245,241,234,0.5) 1px, transparent 1px, transparent 90px),
+          repeating-linear-gradient(to bottom, rgba(245,241,234,0.5) 0px, rgba(245,241,234,0.5) 1px, transparent 1px, transparent 90px);
+      }
+
+      .sunburst-wrap {
+        position: absolute;
+        top: 38%;
+        left: 78%;
+        width: 900px;
+        height: 900px;
+        transform: translate(-50%, -50%);
+      }
+      .glow {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(197,164,93,0.55) 0%, rgba(197,164,93,0.18) 32%, rgba(197,164,93,0) 68%);
+      }
+      .rays { position: absolute; inset: 0; }
+
+      .dust {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: rgba(197,164,93,0.55);
+      }
+
+      .vignette {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(46,46,46,0.1) 0%, rgba(46,46,46,0) 35%, rgba(46,46,46,0.55) 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="10"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="bg" class="clip bg" data-start="0" data-duration="10" data-track-index="0"></div>
+      <div id="grid" class="clip grid" data-start="0" data-duration="10" data-track-index="1"></div>
+
+      <div id="sunburstWrap" class="clip sunburst-wrap" data-start="0" data-duration="10" data-track-index="2">
+        <div class="glow" id="glow"></div>
+        <svg class="rays" id="rays" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+
+      <div id="dustField" class="clip" data-start="0" data-duration="10" data-track-index="3"></div>
+
+      <div id="vignette" class="clip vignette" data-start="0" data-duration="10" data-track-index="4"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const DURATION = 10;
+      const TWO_PI = Math.PI * 2;
+
+      // ---- Sunburst rays: 16 lines radiating from center, drawn once (deterministic) ----
+      const raysSvg = document.getElementById("rays");
+      const RAY_COUNT = 16;
+      for (let i = 0; i < RAY_COUNT; i++) {
+        const angle = (i / RAY_COUNT) * 360;
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const rad = (angle - 90) * (Math.PI / 180);
+        const cx = 450, cy = 450, innerR = 90, outerR = 430;
+        line.setAttribute("x1", cx + Math.cos(rad) * innerR);
+        line.setAttribute("y1", cy + Math.sin(rad) * innerR);
+        line.setAttribute("x2", cx + Math.cos(rad) * outerR);
+        line.setAttribute("y2", cy + Math.sin(rad) * outerR);
+        line.setAttribute("stroke", "rgba(197,164,93,0.35)");
+        line.setAttribute("stroke-width", "1.5");
+        raysSvg.appendChild(line);
+      }
+
+      // Glow + rays breathe on a slow sine — period is the FULL duration so t=0 and
+      // t=10 match exactly (value AND velocity), giving a seamless video loop.
+      const glowEl = document.getElementById("glow");
+      const sunburstWrapEl = document.getElementById("sunburstWrap");
+      const breathPhase = { p: 0 };
+      tl.to(
+        breathPhase,
+        {
+          p: TWO_PI,
+          duration: DURATION,
+          ease: "none",
+          onUpdate: () => {
+            const s = 1 + Math.sin(breathPhase.p) * 0.05;
+            const op = 0.82 + Math.sin(breathPhase.p) * 0.14;
+            sunburstWrapEl.style.transform = `translate(-50%, -50%) scale(${s})`;
+            glowEl.style.opacity = op;
+          },
+        },
+        0,
+      );
+
+      // Rays rotate one full slow revolution across the loop (0deg -> 360deg wraps seamlessly).
+      const raysEl = document.getElementById("rays");
+      tl.fromTo(
+        raysEl,
+        { rotate: 0 },
+        { rotate: 360, duration: DURATION, ease: "none" },
+        0,
+      );
+
+      // ---- Dust field: 40 motes, each bobbing on its own sine phase (deterministic
+      // per-index seed, no Math.random — required for reproducible renders) ----
+      const dustField = document.getElementById("dustField");
+      const DUST_COUNT = 40;
+      const dustEls = [];
+      for (let i = 0; i < DUST_COUNT; i++) {
+        const el = document.createElement("div");
+        el.className = "dust";
+        const seed = i * 137.51; // golden-angle-ish spread, fully deterministic
+        const xPct = (seed % 100);
+        const baseYPct = ((i * 53) % 100);
+        el.style.left = `${xPct}%`;
+        el.style.top = `${baseYPct}%`;
+        el.style.opacity = 0.25 + (i % 5) * 0.09;
+        dustField.appendChild(el);
+        dustEls.push({ el, phaseOffset: (i / DUST_COUNT) * TWO_PI, ampX: 8 + (i % 4) * 6, ampY: 14 + (i % 5) * 5 });
+      }
+
+      const dustPhase = { p: 0 };
+      tl.to(
+        dustPhase,
+        {
+          p: TWO_PI,
+          duration: DURATION,
+          ease: "none",
+          onUpdate: () => {
+            dustEls.forEach((d) => {
+              const localPhase = dustPhase.p + d.phaseOffset;
+              const dx = Math.sin(localPhase) * d.ampX;
+              const dy = Math.cos(localPhase) * d.ampY;
+              d.el.style.transform = `translate(${dx}px, ${dy}px)`;
+            });
+          },
+        },
+        0,
+      );
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
