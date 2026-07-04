@@ -1,6 +1,13 @@
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Hero video: pause on prefers-reduced-motion, holding on the poster frame.
+  const heroVideo = document.querySelector('.hero-video');
+  if (heroVideo && reduceMotion) {
+    heroVideo.pause();
+    heroVideo.removeAttribute('autoplay');
+  }
+
   // Sticky nav state
   const nav = document.querySelector('.nav');
   const onScrollNav = () => {
