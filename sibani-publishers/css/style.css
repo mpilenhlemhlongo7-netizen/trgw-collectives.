@@ -411,6 +411,24 @@ a { color: inherit; }
   .about-grid { grid-template-columns: 1fr; }
 }
 
+.about-sunburst {
+  position: absolute;
+  top: 50%;
+  left: 12%;
+  width: min(700px, 90vw);
+  height: min(700px, 90vw);
+  transform: translate(-50%, -50%);
+  color: var(--gold-rich);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .about-sunburst { left: 50%; }
+}
+
+.about-grid { position: relative; z-index: 1; }
+
 .about-emblem {
   display: flex;
   align-items: center;
@@ -446,6 +464,14 @@ a { color: inherit; }
   border-top: 2px solid var(--gold-rich);
   padding-top: 1rem;
 }
+.value-icon {
+  display: inline-flex;
+  color: var(--gold-rich);
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.8rem;
+}
+.value-icon svg { width: 100%; height: 100%; }
 .value-card h4 {
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -646,6 +672,14 @@ a { color: inherit; }
   font-size: 1.1rem;
 }
 .movement-card p { font-size: 0.92rem; }
+.movement-icon {
+  display: inline-flex;
+  color: var(--gold-rich);
+  width: 36px;
+  height: 36px;
+  margin-bottom: 0.7rem;
+}
+.movement-icon svg { width: 100%; height: 100%; }
 
 .platform-row {
   display: flex;
@@ -662,6 +696,13 @@ a { color: inherit; }
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--navy-primary);
+  text-decoration: none;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+.platform-chip:hover,
+.platform-chip:focus-visible {
+  border-color: var(--gold-rich);
+  color: var(--gold-rich);
 }
 .platform-chip svg { width: 16px; height: 16px; fill: var(--gold-rich); }
 
@@ -733,6 +774,19 @@ a { color: inherit; }
 @media (max-width: 900px) {
   .contact-grid { grid-template-columns: 1fr; }
 }
+
+.contact-email {
+  display: inline-block;
+  font-family: var(--font-num);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gold-rich);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+.contact-email:hover,
+.contact-email:focus-visible { border-color: var(--gold-rich); }
 
 .form-group { margin-bottom: 1.3rem; }
 .form-group label {
