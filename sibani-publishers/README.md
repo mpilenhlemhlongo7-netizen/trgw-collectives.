@@ -12,6 +12,8 @@ The official Sibani brand board, the print-ready wraparound cover PDF for Think 
 - **Book cover**: `assets/images/book-cover-front.jpg`, cropped from the actual print-ready wraparound PDF (`Book_cover.pdf`) supplied for this build. `assets/images/book-cover-wraparound.jpg` holds the full back/spine/front for future use (e.g. a Book Detail page). ISBN 978-1-83492-603-2 is now in the JSON-LD and displayed on the catalogue card, both read directly off the real cover.
 - **Hero**: `assets/images/hero-briefcase-bmw.jpg`, the real photo of Melokuhle in uniform, briefcase in hand, holding Think Rich, Grow Wise at a BMW dealership. This replaced an earlier abstract Three.js scene once the real signature photo was supplied — an authentic photo of the actual brand statement beats a symbolic 3D stand-in.
 - **Field gallery** (Money & Mindset Movement section): three more real photos — the BMW dealership shot, a corporate hand-off photo, and a city-skyline shot — presented as proof-in-the-field photography.
+- **Contact email**: sibani.publishers@gmail.com, shown in the Contact section, footer, and `Organization` JSON-LD. Netlify Forms submissions still need a notification rule pointed at this address — set it under the Netlify dashboard's Forms → Notifications (code alone can't configure that).
+- **Social links**: TikTok, YouTube, X, and Pinterest chips in the Movement section link to `@trgwcollectives` on each platform. Worth a quick click-through once live to confirm each one resolves.
 
 ## What is actually built (Phase 1)
 
