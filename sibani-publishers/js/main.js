@@ -116,5 +116,11 @@
     categorySelect.addEventListener('change', () => {
       categoryHint.textContent = categoryNotes[categorySelect.value] || '';
     });
+
+    const requestedEnquiry = new URLSearchParams(window.location.search).get('enquiry');
+    if (requestedEnquiry && categoryNotes[requestedEnquiry]) {
+      categorySelect.value = requestedEnquiry;
+      categoryHint.textContent = categoryNotes[requestedEnquiry];
+    }
   }
 })();

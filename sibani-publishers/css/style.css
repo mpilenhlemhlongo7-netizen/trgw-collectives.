@@ -165,8 +165,11 @@ a { color: inherit; }
 }
 
 .nav.is-scrolled {
+  /* No backdrop-filter here: it would establish a new containing block for
+     this element's fixed-position descendants (.nav-links on mobile,
+     .cart-toggle), trapping their inset:0 sizing inside this shrunk nav bar
+     instead of the viewport. The near-opaque background alone reads the same. */
   background: rgba(46, 46, 46, 0.94);
-  backdrop-filter: blur(10px);
   padding: 0.9rem 0;
   box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }

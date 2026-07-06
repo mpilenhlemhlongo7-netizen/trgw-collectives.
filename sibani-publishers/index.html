@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/shop.css">
 
 <script type="application/ld+json">
 {
@@ -84,11 +85,16 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#catalogue">Catalogue</a></li>
+      <li><a href="shop.html">Shop</a></li>
       <li><a href="#movement">Movement</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
   </div>
+  <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" aria-haspopup="dialog">
+    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+    <span class="cart-count">0</span>
+  </button>
 </nav>
 
 <main id="main">
@@ -201,7 +207,28 @@
               <div class="book-stat"><span class="num" data-count="6">0</span><span class="label">Parts</span></div>
             </div>
             <p style="font-size: 0.78rem; color: var(--slate); letter-spacing: 0.03em;">ISBN 978-1-83492-603-2</p>
-            <a href="#contact" class="btn btn-outline-dark">Enquire About This Title</a>
+
+            <div class="book-purchase">
+              <div class="purchase-row">
+                <div class="purchase-row-info">
+                  <span class="purchase-row-edition">Second Edition</span>
+                  <span class="purchase-row-price">R450</span>
+                </div>
+                <button type="button" class="btn btn-primary btn-add-cart" data-add-to-cart="trgw-second-edition">Add to Cart</button>
+              </div>
+              <div class="purchase-row">
+                <div class="purchase-row-info">
+                  <span class="purchase-row-edition">First Edition (A6 Print)</span>
+                  <span class="purchase-row-price">R250</span>
+                </div>
+                <button type="button" class="btn btn-primary btn-add-cart" data-add-to-cart="trgw-first-edition">Add to Cart</button>
+              </div>
+            </div>
+
+            <div class="book-actions">
+              <a href="shop.html" class="btn btn-outline-dark">Visit the Shop</a>
+              <a href="index.html?enquiry=publishing#contact" class="btn-text-link">Enquire About This Title &rarr;</a>
+            </div>
           </div>
         </div>
 
@@ -420,6 +447,7 @@
     <div class="footer-links">
       <a href="#about">About</a>
       <a href="#catalogue">Catalogue</a>
+      <a href="shop.html">Shop</a>
       <a href="#movement">Movement</a>
       <a href="#contact">Contact</a>
       <a href="mailto:sibani.publishers@gmail.com">sibani.publishers@gmail.com</a>
@@ -428,6 +456,8 @@
 </footer>
 
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="js/store-config.js"></script>
+<script src="js/cart.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

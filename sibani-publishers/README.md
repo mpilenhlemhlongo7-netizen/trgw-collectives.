@@ -10,10 +10,10 @@ The official Sibani brand board, the print-ready wraparound cover PDF for Think 
 - **Typography**: Cinzel (headings) and Montserrat (body), per the brand board's typography spec.
 - **Logo**: `assets/images/sibani-emblem.png` (transparent, cropped from the brand board for the nav/footer) and `assets/images/sibani-logo-lockup.png` (full mark + wordmark + tagline, used in About).
 - **Book cover**: `assets/images/book-cover-front.jpg`, cropped from the actual print-ready wraparound PDF (`Book_cover.pdf`) supplied for this build. `assets/images/book-cover-wraparound.jpg` holds the full back/spine/front for future use (e.g. a Book Detail page). ISBN 978-1-83492-603-2 is now in the JSON-LD and displayed on the catalogue card, both read directly off the real cover.
-- **Hero**: `assets/images/hero-briefcase-bmw.jpg`, the real photo of Melokuhle in uniform, briefcase in hand, holding Think Rich, Grow Wise at a BMW dealership. This replaced an earlier abstract Three.js scene once the real signature photo was supplied — an authentic photo of the actual brand statement beats a symbolic 3D stand-in.
-- **Field gallery** (Money & Mindset Movement section): three more real photos — the BMW dealership shot, a corporate hand-off photo, and a city-skyline shot — presented as proof-in-the-field photography.
+- **Hero**: `assets/video/hero-loop.mp4`, a cinematic 3D/motion hero loop generated with HyperFrames (sunburst glow, drifting particles, warm brand-toned gradient), replacing the earlier hero photo per Melokuhle's direction. `assets/video/hero-loop-poster.jpg` holds the frame while the video loads, and pauses to that frame under `prefers-reduced-motion`.
+- **Field gallery** (Money & Mindset Movement section): four real photos — the BMW dealership shot, a corporate hand-off photo, a city-skyline shot, and Melokuhle at King Shaka International Airport — presented as proof-in-the-field photography.
 - **Contact email**: sibani.publishers@gmail.com, shown in the Contact section, footer, and `Organization` JSON-LD. Netlify Forms submissions still need a notification rule pointed at this address — set it under the Netlify dashboard's Forms → Notifications (code alone can't configure that).
-- **Social links**: TikTok, YouTube, X, and Pinterest chips in the Movement section link to `@trgwcollectives` on each platform. Worth a quick click-through once live to confirm each one resolves.
+- **Social links**: only the accounts Melokuhle actually runs — TikTok, YouTube, Instagram, and LinkedIn, all `@trgwcollectives` — in the Movement section and the `Organization` JSON-LD `sameAs`. X and Pinterest were removed since those accounts don't exist.
 
 ## What is actually built (Phase 1)
 
@@ -23,6 +23,19 @@ The official Sibani brand board, the print-ready wraparound cover PDF for Think 
 - SEO: meta description, canonical, Open Graph, Twitter Card, `Organization` and `Book` JSON-LD (now including the real ISBN and cover image URL), `robots.txt`, `sitemap.xml`.
 - Accessibility: skip link, visible focus states, `prefers-reduced-motion` support throughout, semantic headings, descriptive alt text on every photo.
 - Netlify-ready contact form with honeypot spam field, `thanks.html` success page, enquiry categorised as General / Publishing / Media / Partnerships / Speaking / Rights / Support, all routed to Melokuhle until departmental contacts exist.
+
+## Shop — Think Rich, Grow Wise + Publishing Services
+
+`shop.html` and `checkout.html` add a real, working storefront on top of the static site — no backend, no third-party sign-up required to start selling today.
+
+- **Products** (`js/store-config.js`): Second Edition R450, First Edition (A6 Print) R250 — the two prices Melokuhle confirmed. Add/remove services or change prices in one place; both `shop.html` and the homepage Catalogue card read from this file.
+- **Publishing Services**: the six real enquiry categories (Publishing, Media, Partnerships, Speaking, Rights, Support) presented as service cards on the Shop page. Each is quote-based, not fixed-price — deliberately, since inventing service pricing would violate the "verified figures only" standard. "Get a Quote" deep-links to `index.html?enquiry=<category>#contact`, which pre-selects that category in the existing contact form (see the `?enquiry=` handling added to `js/main.js`).
+- **Cart** (`js/cart.js`): a localStorage-backed cart shared across all three pages via a slide-in drawer, with a live badge on the nav cart icon everywhere.
+- **Checkout** (`checkout.html` + `js/checkout.js`): buyer details + delivery address, an auto-generated order reference (`SIB-YYYYMMDD-####`), and a payment step.
+- **Payment — live today**: direct-to-Capitec. Melokuhle's real account (Mr. Melokuhle M. Mhlongo, Capitec Savings, acc. 2368365415, branch 470010) is in `js/store-config.js` and shown on the order confirmation screen along with the reference to quote. No merchant sign-up, no KYC wait — this works the moment the site is live. An optional instant "Capitec Pay" cellphone-number field is stubbed in the same config for later.
+- **Payment — upgrade path, not yet active**: a PayFast redirect integration is fully wired in `js/checkout.js` (`SibaniCheckout.submitToPayFast`) for automated card / Instant EFT, which settles to any SA bank account including Capitec. It stays off (`payfast.enabled: false` in `store-config.js`) until Melokuhle opens a free merchant account at payfast.co.za and pastes in `merchantId`/`merchantKey` — that sign-up needs his own ID and banking details, so it can't be completed on his behalf.
+- **Order notification**: since this is a static site with no backend, there's no automatic order database. On "Place Order," an "Email Order to Sibani" button opens a pre-filled `mailto:` to sibani.publishers@gmail.com with the full order details — the buyer sends it in one click after seeing the payment instructions.
+- **No fabricated shipping rates**: delivery/collection cost isn't charged at checkout since no real courier pricing was supplied; the order total is book price only, with a note that delivery is arranged directly with Sibani afterward.
 
 ## What is deliberately NOT built yet, and why
 
