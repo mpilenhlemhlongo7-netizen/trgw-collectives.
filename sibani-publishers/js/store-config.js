@@ -43,7 +43,7 @@ window.SibaniStore = {
     accountNumber: '2368365415',
     accountType: 'Savings Account',
     branchCode: '470010', // Capitec's universal branch code — same for every Capitec account
-    payCellphone: 'ADD YOUR CAPITEC PAY CELLPHONE NUMBER', // optional: enables instant Capitec Pay by phone number
+    payCellphone: '067 304 1992', // enables instant Capitec Pay by phone number
   },
 
   // SECONDARY, upgrade path: automated card / Instant EFT via PayFast, which
