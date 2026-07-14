@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Sibani Publishers</title>
+<meta name="description" content="Complete your Sibani Publishers order.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2E2E2E">
+<link rel="icon" type="image/png" href="assets/images/sibani-emblem.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/shop.css">
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav class="nav" aria-label="Primary">
+  <div class="container">
+    <a href="index.html" class="wordmark">
+      <img src="assets/images/sibani-emblem.png" alt="" width="38" height="24">
+      Sibani Publishers
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#catalogue">Catalogue</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="workshops.html">Workshops</a></li>
+      <li><a href="index.html#movement">Movement</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+  </div>
+  <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" aria-haspopup="dialog">
+    <svg class="cart-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h2l2.4 12.4a2 2 0 0 0 2 1.6h8.4a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+    <span class="cart-count">0</span>
+  </button>
+</nav>
+
+<main id="main">
+
+  <section class="page-header">
+    <div class="container">
+      <span class="kicker">Checkout</span>
+      <h1>Complete your order.</h1>
+      <p class="lede">Fill in your details, choose how you'd like to pay, and Sibani will confirm dispatch directly.</p>
+    </div>
+  </section>
+
+  <section class="section" id="checkout-section">
+    <div class="container">
+      <div class="checkout-grid" id="checkout-active">
+
+        <div>
+          <div id="empty-cart-notice" class="hidden">
+            <p>Your cart is empty. <a href="shop.html" class="btn-text-link">Visit the Shop →</a></p>
+          </div>
+
+          <form id="checkout-form">
+            <h3>Your Details</h3>
+            <div class="form-group">
+              <label for="full-name">Full Name</label>
+              <input type="text" id="full-name" name="full-name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+              <label for="address">Delivery Address</label>
+              <textarea id="address" name="address" rows="3" required placeholder="Street, suburb, city, postal code"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="notes">Order Notes (optional)</label>
+              <textarea id="notes" name="notes" rows="2"></textarea>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Payment Method</h3>
+            <div class="payment-methods" id="payment-methods">
+              <label class="payment-method">
+                <input type="radio" name="payment-method" value="capitec" checked>
+                <span class="payment-method-body">
+                  <h4>Capitec Pay / Direct EFT</h4>
+                  <p>Pay Melokuhle directly &mdash; instant via Capitec Pay, or a standard bank transfer. Your order reference and banking details are shown on the next step.</p>
+                </span>
+              </label>
+              <label class="payment-method is-disabled" id="payfast-method">
+                <input type="radio" name="payment-method" value="payfast" disabled>
+                <span class="payment-method-body">
+                  <h4>Card / Instant EFT <span class="payment-method-tag">Coming Soon</span></h4>
+                  <p>Automated card and Instant EFT checkout via PayFast, activating once Sibani's merchant account is linked.</p>
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="place-order-btn">Place Order</button>
+          </form>
+
+          <div class="order-confirmation hidden" id="order-confirmation">
+            <span class="kicker" style="color:#e8c896;">Order Placed</span>
+            <h3>Thank you, your order is reserved.</h3>
+            <p>Reference number &mdash; quote this with your payment:</p>
+            <div class="order-reference" id="order-reference"></div>
+
+            <div id="capitec-instructions">
+              <div class="payment-detail-row"><span class="payment-detail-label">Account Holder</span><span class="payment-detail-value" id="capitec-holder"></span></div>
+              <div class="payment-detail-row"><span class="payment-detail-label">Bank</span><span class="payment-detail-value">Capitec Bank</span></div>
+              <div class="payment-detail-row"><span class="payment-detail-label">Account Number</span><span class="payment-detail-value" id="capitec-account"></span></div>
+              <div class="payment-detail-row"><span class="payment-detail-label">Account Type</span><span class="payment-detail-value" id="capitec-type"></span></div>
+              <div class="payment-detail-row"><span class="payment-detail-label">Branch Code</span><span class="payment-detail-value" id="capitec-branch"></span></div>
+              <div class="payment-detail-row hidden" id="capitec-cell-row"><span class="payment-detail-label">Capitec Pay Number</span><span class="payment-detail-value" id="capitec-cell"></span></div>
+              <div class="payment-detail-row"><span class="payment-detail-label">Amount</span><span class="payment-detail-value" id="capitec-amount"></span></div>
+              <div class="payment-detail-row"><span class="payment-detail-label">Reference</span><span class="payment-detail-value" id="capitec-reference"></span></div>
+            </div>
+
+            <p style="margin-top: 1.4rem; font-size: 0.85rem; color: rgba(250,248,242,0.7);">Once payment reflects, Sibani will confirm and arrange delivery or collection. Send proof of payment to speed this up.</p>
+
+            <div class="order-confirmation-actions">
+              <a class="btn btn-primary" id="email-order-link" href="#" target="_blank" rel="noopener">Email Order to Sibani</a>
+              <a class="btn btn-ghost" href="index.html">Back to Home</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-summary" id="checkout-summary">
+          <h3>Order Summary</h3>
+          <div id="summary-lines"></div>
+          <div class="checkout-total"><span>Total</span><span id="summary-total">R0</span></div>
+          <p class="cart-delivery-note" style="margin-top: 1rem;">Delivery or collection is arranged directly with Sibani after your order is placed.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <span class="footer-brand">
+      <img src="assets/images/sibani-emblem.png" alt="" width="26" height="16">
+      © <span id="year"></span> Sibani Publishers. All rights reserved.
+    </span>
+    <div class="footer-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#catalogue">Catalogue</a>
+      <a href="shop.html">Shop</a>
+      <a href="workshops.html">Workshops</a>
+      <a href="index.html#movement">Movement</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="mailto:sibani.publishers@gmail.com">sibani.publishers@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script src="js/store-config.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script src="js/checkout.js"></script>
+</body>
+</html>

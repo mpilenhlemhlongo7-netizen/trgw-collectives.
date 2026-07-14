@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>06 — Reinvestment</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face {
+          font-family: "Archivo Black";
+          src: url("assets/fonts/archivo-black-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "JetBrains Mono";
+          src: url("assets/fonts/jetbrains-mono-700.woff2") format("woff2");
+          font-weight: 700;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: "Space Grotesk";
+          src: url("assets/fonts/space-grotesk-400.woff2") format("woff2");
+          font-weight: 400;
+          font-style: normal;
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        #root {
+          position: relative;
+          width: 1080px;
+          height: 1920px;
+          overflow: hidden;
+          background: #0c1b32;
+          container-type: size;
+          font-family: "Space Grotesk", sans-serif;
+        }
+
+        .clip {
+          position: absolute;
+        }
+
+        /* full-bleed navy ground — lives on a clip layer, never on #root itself */
+        .bg-clip {
+          inset: 0;
+          background: #0c1b32;
+        }
+
+        /* ---- label row: "REINVESTMENT" mono-kicker, types on ---- */
+        .label-row {
+          top: 170px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+        }
+        .label-text {
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 4.26cqw; /* ~46px @1080 */
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #faf8f2;
+          white-space: nowrap;
+        }
+
+        /* ---- "4/5" progress marker — supporting mark, secondary accent ---- */
+        .marker-06 {
+          top: 70px;
+          right: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 10px 24px;
+          background: #faf8f2;
+          border: 2px solid #ce712c;
+          border-radius: 999px;
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 700;
+          font-size: 2.22cqw; /* ~24px @1080 */
+          letter-spacing: 0.06em;
+          color: #ce712c;
+          transform-origin: 50% 50%;
+          will-change: transform;
+        }
+
+        /* ---- ring row: count-up ring, visibly larger than Frames 3–5 ---- */
+        .ring-row {
+          top: 450px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+        }
+        .hold-jitter {
+          width: 660px;
+          height: 660px;
+          will-change: transform;
+        }
+        .ring-wrap {
+          position: relative;
+          width: 660px;
+          height: 660px;
+          transform-origin: 50% 50%;
+          will-change: transform;
+        }
+        .ring-svg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .ring-track,
+        .ring-fill {
+          fill: none;
+          stroke-linecap: round;
+        }
+        .ring-track {
+          stroke: rgba(250, 248, 242, 0.28);
+          stroke-width: 26;
+        }
+        .ring-fill {
+          stroke: #ce712c;
+          stroke-width: 26;
+          transform: rotate(-90deg);
+          transform-origin: 330px 330px;
+        }
+        .counter-shell {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .counter-06 {
+          font-family: "Archivo Black", sans-serif;
+          font-weight: 400;
+          color: #ce712c;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.01em;
+          line-height: 0.9;
+          font-size: 8.8cqw; /* start size ~95px @1080, GSAP grows this */
+        }
+
+        /* ---- caption row: job phrase, builds below, holds ---- */
+        .caption-row {
+          top: 1220px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          padding: 0 90px;
+        }
+        .caption-text {
+          font-family: "JetBrains Mono", monospace;
+          font-weight: 400;
+          font-size: 3.15cqw; /* ~34px @1080 */
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #ce712c;
+          text-align: center;
+          line-height: 1.35;
+          max-width: 820px;
+        }
+      </style>
+
+      <div
+        id="root"
+        data-composition-id="06-reinvestment"
+        data-width="1080"
+        data-height="1920"
+      >
+        <div class="clip bg-clip" data-start="0" data-duration="4.629" data-track-index="0"></div>
+
+        <div class="clip label-row" data-start="0" data-duration="4.629" data-track-index="1">
+          <div class="label-text" id="label-06"></div>
+        </div>
+
+        <div class="clip marker-06" id="marker-06" data-start="1.2" data-duration="3.429" data-track-index="3">
+          4/5
+        </div>
+
+        <div class="clip ring-row" data-start="0" data-duration="4.629" data-track-index="2">
+          <div class="hold-jitter" id="holdJitter-06">
+            <div class="ring-wrap" id="ringWrap-06">
+              <svg class="ring-svg" viewBox="0 0 660 660" xmlns="http://www.w3.org/2000/svg">
+                <circle class="ring-track" cx="330" cy="330" r="300" />
+                <circle class="ring-fill" id="ringFill-06" cx="330" cy="330" r="300" />
+              </svg>
+              <div class="counter-shell">
+                <div class="counter-06" id="counter-06">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="clip caption-row" data-start="2.8" data-duration="1.829" data-track-index="4">
+          <div class="caption-text" id="caption-06">GOES BACK INTO WHAT'S ALREADY WORKING</div>
+        </div>
+      </div>
+
+      <script src="assets/js/gsap.min.js"></script>
+      <script>
+        window.__timelines = window.__timelines || {};
+
+        const labelEl = document.getElementById("label-06");
+        const ringFill = document.getElementById("ringFill-06");
+        const counterEl = document.getElementById("counter-06");
+        const holdJitterEl = document.getElementById("holdJitter-06");
+
+        // --- synchronous initial-state setup (correct even before any tween ticks) ---
+        const LABEL_TEXT = "REINVESTMENT";
+        labelEl.textContent = "";
+
+        const RING_LEN = ringFill.getTotalLength();
+        ringFill.style.strokeDasharray = RING_LEN;
+        ringFill.style.strokeDashoffset = RING_LEN; // fully empty
+
+        counterEl.textContent = "0%";
+        counterEl.style.fontSize = "95px";
+
+        const tl = gsap.timeline({ paused: true });
+
+        // Scene 1 (0.0–1.2s) — hero ring outline pops in (hero visible by t<=0.5s)
+        tl.fromTo(
+          "#ringWrap-06",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" },
+          0,
+        );
+
+        // Scene 1 — "REINVESTMENT" types on (discrete-text-sequence, smooth-slice variation)
+        const labelLen = { v: 0 };
+        tl.to(
+          labelLen,
+          {
+            v: LABEL_TEXT.length,
+            duration: 0.85,
+            ease: "power1.inOut",
+            onUpdate: () => {
+              labelEl.textContent = LABEL_TEXT.substring(0, Math.floor(labelLen.v));
+            },
+          },
+          0,
+        );
+
+        // Scene 2 (1.2–2.8s) — ring fills to 25% (stat-bars-and-fills ring form) +
+        // count-up 0→25 with growing font-size (counting-dynamic-scale), same ease/start
+        // so the number and the ring land as one beat.
+        const RING_PCT = 0.25;
+        tl.to(
+          ringFill,
+          {
+            strokeDashoffset: RING_LEN * (1 - RING_PCT),
+            duration: 1.0,
+            ease: "power2.out",
+          },
+          1.2,
+        );
+
+        const counterState = { value: 0, fontSize: 95 };
+        tl.to(
+          counterState,
+          {
+            value: 25,
+            fontSize: 190,
+            duration: 1.0,
+            ease: "power2.out",
+            onUpdate: () => {
+              counterEl.textContent = Math.round(counterState.value) + "%";
+              counterEl.style.fontSize = counterState.fontSize + "px";
+            },
+          },
+          1.2,
+        );
+
+        // Scene 2 — "4/5" marker pips in (spring-pop-entrance)
+        tl.fromTo(
+          "#marker-06",
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.45, ease: "power3.out" },
+          1.4,
+        );
+
+        // Scene 3 (2.8–4.0s) — caption builds below
+        tl.fromTo(
+          "#caption-06",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          2.8,
+        );
+
+        // Scene 3 — hold still, faint jitter only (sine-wave-loop, low amplitude,
+        // driven on a separate outer wrapper so it never fights the entrance tween
+        // still resolving on #ringWrap-06)
+        const jitterPhase = { p: 0 };
+        tl.to(
+          jitterPhase,
+          {
+            p: Math.PI * 2 * 0.4,
+            duration: 1.0,
+            ease: "none",
+            onUpdate: () => {
+              const s = 1 + Math.sin(jitterPhase.p) * 0.01;
+              const y = Math.sin(jitterPhase.p) * 2;
+              holdJitterEl.style.transform = `translateY(${y}px) scale(${s})`;
+            },
+          },
+          3.0,
+        );
+
+        window.__timelines["06-reinvestment"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
