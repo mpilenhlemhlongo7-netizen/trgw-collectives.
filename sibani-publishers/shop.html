@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop — Sibani Publishers</title>
-<meta name="description" content="Buy Think Rich, Grow Wise direct from Sibani Publishers, and explore the publishing, media, partnership and speaking services Sibani offers.">
+<meta name="description" content="Buy Think Rich, Grow Wise direct from Sibani Publishers, reserve the Premium Publishing Package, and explore the publishing, media, partnership and speaking services Sibani offers.">
 <link rel="canonical" href="https://sibanipublishers.com/shop.html">
 <meta name="theme-color" content="#2E2E2E">
 <link rel="icon" type="image/png" href="assets/images/sibani-emblem.png">
@@ -48,6 +48,21 @@
   }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Premium Publishing Package",
+  "description": "End-to-end publishing under the Sibani imprint: manuscript editing, cover design, ISBN registration and print coordination, and launch marketing support.",
+  "provider": { "@type": "Organization", "name": "Sibani Publishers" },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "ZAR",
+    "price": "15000",
+    "url": "https://sibanipublishers.com/shop.html"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -63,6 +78,7 @@
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#catalogue">Catalogue</a></li>
       <li><a href="shop.html">Shop</a></li>
+      <li><a href="workshops.html">Workshops</a></li>
       <li><a href="index.html#movement">Movement</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
@@ -90,6 +106,15 @@
       <span class="kicker">Knowledge</span>
       <h2 class="reveal">Think Rich, Grow Wise</h2>
       <div class="product-grid" id="product-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ PREMIUM PACKAGE ============================ -->
+  <section class="section package-feature" id="package" style="background: var(--cream); padding-top: 0;">
+    <div class="container">
+      <span class="kicker">For Aspiring Authors</span>
+      <h2 class="reveal">Publish With Sibani</h2>
+      <div class="package-card reveal" id="package-card"></div>
     </div>
   </section>
 
@@ -126,6 +151,7 @@
       <a href="index.html#about">About</a>
       <a href="index.html#catalogue">Catalogue</a>
       <a href="shop.html">Shop</a>
+      <a href="workshops.html">Workshops</a>
       <a href="index.html#movement">Movement</a>
       <a href="index.html#contact">Contact</a>
       <a href="mailto:sibani.publishers@gmail.com">sibani.publishers@gmail.com</a>
@@ -166,6 +192,20 @@
       </div>`
       )
       .join('');
+
+    const checkIcon = '<svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5 L8 14.5 L16 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const pkg = store.packages[0];
+    document.getElementById('package-card').innerHTML = `
+      <span class="package-card-tag">Premium</span>
+      <span class="package-card-edition">${pkg.edition}</span>
+      <h3>${pkg.title}</h3>
+      <p class="package-card-description">${pkg.description}</p>
+      <div class="package-card-price">${store.currency}${pkg.price.toLocaleString('en-ZA')}</div>
+      <ul class="package-includes">
+        ${pkg.includes.map((item) => `<li>${checkIcon}${item}</li>`).join('')}
+      </ul>
+      <button type="button" class="btn btn-primary btn-add-cart" data-add-to-cart="${pkg.id}">Reserve Your Package</button>
+    `;
 
     const serviceGrid = document.getElementById('service-grid');
     serviceGrid.innerHTML = store.services

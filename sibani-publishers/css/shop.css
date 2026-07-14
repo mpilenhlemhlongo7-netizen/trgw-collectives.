@@ -151,6 +151,64 @@
 
 .btn-add-cart { white-space: nowrap; }
 
+/* ---------------------------------- Premium package ---------------------------------- */
+
+.package-feature { text-align: center; }
+.package-card {
+  position: relative;
+  max-width: 640px;
+  margin: 3rem auto 0;
+  background: var(--navy-primary);
+  border: 1px solid var(--gold-rich);
+  padding: clamp(2rem, 5vw, 3.2rem);
+  text-align: left;
+}
+.package-card-tag {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  background: var(--gold-rich);
+  color: var(--navy-primary);
+  font-family: var(--font-num);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+}
+.package-card-edition {
+  font-family: var(--font-num);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-antique);
+}
+.package-card h3 { color: var(--white); margin-top: 0.4rem; }
+.package-card-description { color: rgba(250,248,242,0.75); }
+.package-card-price {
+  font-family: var(--font-num);
+  font-weight: 800;
+  font-size: 2.4rem;
+  color: var(--gold-rich);
+  margin: 0.4rem 0 1.6rem;
+}
+.package-includes {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+.package-includes li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.92rem;
+  color: rgba(250,248,242,0.85);
+}
+.package-includes li svg { width: 18px; height: 18px; color: var(--gold-rich); flex-shrink: 0; }
+
 /* ---------------------------------- Services grid ---------------------------------- */
 
 .service-grid {
@@ -285,6 +343,22 @@ body.cart-drawer-locked { overflow: hidden; }
   border-bottom: 1px solid var(--grey-light);
 }
 .cart-line-image { width: 56px; height: 72px; object-fit: cover; }
+.cart-line-image--placeholder {
+  display: block;
+  background: var(--navy-primary);
+  position: relative;
+}
+.cart-line-image--placeholder::before {
+  content: 'S';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  color: var(--gold-rich);
+  font-size: 1.1rem;
+}
 .cart-line-info { display: flex; flex-direction: column; gap: 0.2rem; }
 .cart-line-title { font-family: var(--font-head); font-size: 0.95rem; color: var(--navy-primary); }
 .cart-line-edition { font-size: 0.76rem; color: var(--slate); }
@@ -451,6 +525,20 @@ body.cart-drawer-locked { overflow: hidden; }
 #checkout-form .form-group select:focus,
 #checkout-form .form-group textarea:focus {
   border-color: var(--gold-rich);
+}
+
+/* Explicit 3-column variant of .movement-grid (which defaults to 4 columns),
+   used on workshops.html. A real CSS class, not an inline style, so the
+   existing responsive breakpoints below still apply on mobile. */
+.grid-3col {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 3rem;
+}
+@media (max-width: 900px) {
+  .grid-3col { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-3col { grid-template-columns: 1fr; }
 }
 
 .hidden { display: none !important; }

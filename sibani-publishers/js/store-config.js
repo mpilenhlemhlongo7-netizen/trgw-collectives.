@@ -26,6 +26,19 @@ window.SibaniStore = {
     },
   ],
 
+  // Fixed-price purchasable service, confirmed real by Melokuhle — unlike the
+  // quote-only `services` below, this one is sold directly through the cart.
+  packages: [
+    {
+      id: 'publishing-package-premium',
+      title: 'Premium Publishing Package',
+      edition: 'Full-Service Publishing',
+      price: 15000,
+      description: 'End-to-end publishing under the Sibani imprint, from manuscript to launch.',
+      includes: ['Full manuscript editing', 'Cover design', 'ISBN registration & print coordination', 'Launch marketing support'],
+    },
+  ],
+
   services: [
     { key: 'publishing', title: 'Publishing Submissions', description: 'Manuscript review and publication under the Sibani imprint.' },
     { key: 'media', title: 'Media & Press', description: 'Interviews, coverage requests and press coordination.' },

@@ -19,7 +19,7 @@
   }
 
   function findProduct(id) {
-    return store.products.find((p) => p.id === id);
+    return [...store.products, ...(store.packages || [])].find((p) => p.id === id);
   }
 
   function getItems() {
@@ -104,7 +104,7 @@
         .map(
           (item) => `
         <div class="cart-line" data-id="${item.product.id}">
-          <img src="${item.product.image}" alt="" class="cart-line-image">
+          ${item.product.image ? `<img src="${item.product.image}" alt="" class="cart-line-image">` : '<span class="cart-line-image cart-line-image--placeholder" aria-hidden="true"></span>'}
           <div class="cart-line-info">
             <span class="cart-line-title">${item.product.title}</span>
             <span class="cart-line-edition">${item.product.edition}</span>
